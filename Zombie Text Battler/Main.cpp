@@ -272,7 +272,7 @@ int main()
 		//Randomely Increases Defense
 		else
 		{
-			switch (std::rand() % 5)
+			switch (std::rand() % 3)
 			{
 			case 0:
 				std::cout << "The Zombie Increases Defense!" << std::endl;
@@ -292,7 +292,6 @@ int main()
 				Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
 				break;
 			}
-
 		}
 
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
