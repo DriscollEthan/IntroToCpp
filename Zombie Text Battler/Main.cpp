@@ -59,7 +59,7 @@ class Character
 	float CriticalDamageMultiplier = 2.0f;
 	int CriticalChance = 3;
 	float Defense = 1.0f;
-	float DefenseIncreaseBase = 0.5f;
+	float DefenseIncreaseBase = 5.0f;
 
 public:
 	float GetCurrentHealth()
@@ -67,23 +67,23 @@ public:
 		return CurrentHealth;
 	}
 
-	void ChangeDamageBase(float NewDamageBase)
+	void ChangeDamageBase(float ChangeDamageBy)
 	{
-		DamageBase = NewDamageBase;
+		DamageBase += ChangeDamageBy;
 	}
 
-	float GetDamage()
+	float GetDamage(float EnemyDefense)
 	{
 		bool bIsCriticalHit = (std::rand() % CriticalChance == 0);
 
 		if (bIsCriticalHit)
 		{
-			return (DamageBase * CriticalDamageMultiplier) - Defense;
+			return ((DamageBase * CriticalDamageMultiplier) - EnemyDefense >= 0) ? (DamageBase * CriticalDamageMultiplier) - EnemyDefense : 0;
 		}
 		else
 		{
-			return DamageBase - Defense;
-		}
+			return (DamageBase - EnemyDefense >= 0) ? DamageBase - EnemyDefense : 0;
+		} 
 	}
 
 	float TakeDamage(float DamageDealt)
@@ -91,6 +91,11 @@ public:
 		CurrentHealth -= DamageDealt;
 		std::cout << "HIT" << std::endl;
 		return GetCurrentHealth();
+	}
+
+	float GetDefense()
+	{
+		return Defense;
 	}
 
 	void IncreaseDefense()
@@ -110,10 +115,10 @@ public:
 		switch (potionType)
 		{
 		case 0:
-			DamageBase += 2.0f;
+			DamageBase += 10.0f;
 			break;
 		case 1:
-			CurrentHealth += 10;
+			CurrentHealth += 30;
 			break;
 		case 2:
 			IncreaseDefense();
@@ -145,7 +150,7 @@ int main()
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
 
-	Zombie.ChangeDamageBase(8.0f);
+	Zombie.ChangeDamageBase(-2.0f); // Change Base Damage from 10 to | 10 - 2 = 8
 		
 	//Greet Player
 	std::cout << "Welcome to the Driscoll Arena! Today we've prepared some zombies ready for a battle!" << std::endl;
@@ -193,23 +198,23 @@ int main()
 		switch (StrSwitch(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, BlockInput, PotionInput))
 		{
 		case 0:
-			Zombie.TakeDamage(Player.GetDamage());
-			Zombie.ChangeDamageBase(Zombie.GetDamage() + 1.5f);
+			Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
+			Zombie.ChangeDamageBase(1.5f);
 			break;
 		case 1:
 			Player.IncreaseDefense();
-			Zombie.ChangeDamageBase(Zombie.GetDamage() + -2.5f);
+			Zombie.ChangeDamageBase(-2.5f);
 			break;
 		case 2:
 			Player.UsePotion();
-			Zombie.ChangeDamageBase(Zombie.GetDamage() + -2.5f);
+			Zombie.ChangeDamageBase(-2.5f);
 			break;
 		}
 
 		DisplayBattleInformation(Player, Zombie);
 		
 		//Zombie Moves
-		Player.TakeDamage(Zombie.GetDamage());
+		Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
 
 		DisplayBattleInformation(Player, Zombie);
 
