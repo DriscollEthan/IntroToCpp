@@ -3,22 +3,23 @@
 #include <ctime>
 #include "Main.h"
 
+///	Feature List:
+///	*Block Increases Defense vs Mitigates Damage [COMPLETE]
+/// *Potion Randomely Regains health or Buffs Damage [NEXT]
+///	*Zombie Makes Realistic Choices (Besides Block)
+/// *Player Feedback, such as letting the player know of any Critcal Hits, What The Potion Does, etc.
+/// *More Randomness in this Random Generator
+
+
 //C-String Equal
 bool StrEqual(char StringA[], int STRING_A_LENGTH, char StringB[], int STRING_B_LENGTH)
 {
-	if (STRING_A_LENGTH = STRING_B_LENGTH)
+	for (int i = 0; i < STRING_A_LENGTH; ++i)
 	{
-		for (int i = 0; i < STRING_A_LENGTH; ++i)
+		if (StringA[i] != StringB[i])
 		{
-			if (StringA[i] != StringB[i])
-			{
-				return false;
-			}
+			return false;
 		}
-	}
-	else
-	{
-		return false;
 	}
 	return true;
 }
@@ -33,7 +34,7 @@ void StrReset(char String[], int STRING_LENGTH)
 }
 
 //C-String Switch
-int StrSwitch(char String[], int STRING_LENGTH, char Case1[], char Case2[])
+int StrSwitch(char String[], int STRING_LENGTH, char Case1[], char Case2[], char Case3[])
 {
 	if (StrEqual(String, STRING_LENGTH, Case1, STRING_LENGTH))
 	{
@@ -42,6 +43,10 @@ int StrSwitch(char String[], int STRING_LENGTH, char Case1[], char Case2[])
 	else if (StrEqual(String, STRING_LENGTH, Case2, STRING_LENGTH))
 	{
 		return 1;
+	}
+	else if (StrEqual(String, STRING_LENGTH, Case3, STRING_LENGTH))
+	{
+		return 2;
 	}
 	return -1;
 }
@@ -53,6 +58,8 @@ class Character
 	float DamageBase = 10.0f;
 	float CriticalDamageMultiplier = 2.0f;
 	int CriticalChance = 3;
+	float Defense = 1.0f;
+	float DefenseIncreaseBase = 0.5f;
 
 public:
 	float GetCurrentHealth()
@@ -70,7 +77,7 @@ public:
 		}
 		else
 		{
-			return DamageBase;
+			return DamageBase - Defense;
 		}
 	}
 
@@ -78,6 +85,11 @@ public:
 	{
 		CurrentHealth -= DamageDealt;
 		return GetCurrentHealth();
+	}
+
+	void IncreaseDefense()
+	{
+		Defense += DefenseIncreaseBase;
 	}
 };
 
@@ -123,7 +135,6 @@ int main()
 	{
 		//Reset Global Variables
 		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
-		bool bDidPlayerBlock = false;
 
 		//Display Player Health and Zombie Health
 		DisplayBattleInformation(Player, Zombie);
@@ -132,10 +143,13 @@ int main()
 		// +
 		//Get Player's Command (Attack, Block, [TBD]Potion[TBD])
 		char AttackInput[INPUT_ARRAY_LENGTH] = "attack";
-		char BlockInput[INPUT_ARRAY_LENGTH] = "block";
-		while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH) && !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH))
+		char BlockInput[INPUT_ARRAY_LENGTH] = "defense";
+		char PotionInput[INPUT_ARRAY_LENGTH] = "potion";
+		while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH)
+				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH)
+				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH))
 		{
-			std::cout << "You may choose to attack by typing 'attack' or block by typing 'block'. Please choose wisely." << std::endl;
+			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. Please choose wisely." << std::endl;
 			std::cout << std::endl;
 			std::cin >> GlobalInput;
 		}
@@ -147,17 +161,14 @@ int main()
 			Zombie.TakeDamage(Player.GetDamage());
 			break;
 		case 1:
-			bDidPlayerBlock = true;
+			Player.IncreaseDefense();
+			break;
+		case 2:
+			//Potion
 			break;
 		}
 		
 		DisplayBattleInformation(Player, Zombie);
-
-		//Have Zombie Attack Player
-		if (!bDidPlayerBlock)
-		{
-			Player.TakeDamage(Zombie.GetDamage());
-		}
 
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
 		if (Player.GetCurrentHealth() <= 0 || Zombie.GetCurrentHealth() <= 0)
