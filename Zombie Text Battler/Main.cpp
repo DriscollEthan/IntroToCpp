@@ -147,17 +147,16 @@ public:
 		switch (potionType)
 		{
 		case 0:
-			DamageBase += 5.0f;
+			DamageBase += 2.5f;
 			std::cout << "Damage Increased!" << std::endl;
 			std::cout << std::endl;
 			break;
 		case 1:
-			CurrentHealth += 30;
+			CurrentHealth += 20;
 			std::cout << "Health Increased!" << std::endl;
 			std::cout << std::endl;
 			break;
 		case 2:
-			IncreaseDefense();
 			IncreaseDefense();
 			IncreaseDefense();
 			std::cout << "Defense Increased!" << std::endl;
@@ -227,7 +226,7 @@ int main()
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH)
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, PotionInput, INPUT_ARRAY_LENGTH))
 		{
-			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. The potion can heal, increase defense 3 fold, or increase attack. Please choose wisely." << std::endl;
+			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. The potion can heal, increase defense 2 fold, or increase attack. Please choose wisely." << std::endl;
 
 			std::cout << std::endl;
 			std::cin >> GlobalInput;
@@ -273,7 +272,7 @@ int main()
 		//Randomely Increases Defense
 		else
 		{
-			switch (std::rand() % 3)
+			switch (std::rand() % 5)
 			{
 			case 0:
 				std::cout << "The Zombie Increases Defense!" << std::endl;
