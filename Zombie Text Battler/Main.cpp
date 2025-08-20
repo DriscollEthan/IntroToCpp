@@ -67,13 +67,18 @@ public:
 		return CurrentHealth;
 	}
 
+	void ChangeDamageBase(float NewDamageBase)
+	{
+		DamageBase = NewDamageBase;
+	}
+
 	float GetDamage()
 	{
 		bool bIsCriticalHit = (std::rand() % CriticalChance == 0);
 
 		if (bIsCriticalHit)
 		{
-			return DamageBase * CriticalDamageMultiplier;
+			return (DamageBase * CriticalDamageMultiplier) - Defense;
 		}
 		else
 		{
@@ -84,6 +89,7 @@ public:
 	float TakeDamage(float DamageDealt)
 	{
 		CurrentHealth -= DamageDealt;
+		std::cout << "HIT" << std::endl;
 		return GetCurrentHealth();
 	}
 
@@ -138,6 +144,8 @@ int main()
 	Character Zombie = {};
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
+
+	Zombie.ChangeDamageBase(8.0f);
 		
 	//Greet Player
 	std::cout << "Welcome to the Driscoll Arena! Today we've prepared some zombies ready for a battle!" << std::endl;
@@ -186,15 +194,23 @@ int main()
 		{
 		case 0:
 			Zombie.TakeDamage(Player.GetDamage());
+			Zombie.ChangeDamageBase(Zombie.GetDamage() + 1.5f);
 			break;
 		case 1:
 			Player.IncreaseDefense();
+			Zombie.ChangeDamageBase(Zombie.GetDamage() + -2.5f);
 			break;
 		case 2:
-			//Potion
+			Player.UsePotion();
+			Zombie.ChangeDamageBase(Zombie.GetDamage() + -2.5f);
 			break;
 		}
+
+		DisplayBattleInformation(Player, Zombie);
 		
+		//Zombie Moves
+		Player.TakeDamage(Zombie.GetDamage());
+
 		DisplayBattleInformation(Player, Zombie);
 
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
