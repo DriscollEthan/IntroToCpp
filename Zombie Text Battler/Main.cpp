@@ -81,6 +81,9 @@ public:
 
 		if (bIsCriticalHit)
 		{
+			std::cout << "Critical Hit!" << std::endl;
+			std::cout << std::endl;
+
 			return ((DamageBase * CriticalDamageMultiplier) - EnemyDefense >= 0) ? (DamageBase * CriticalDamageMultiplier) - EnemyDefense : 0;
 		}
 		else
@@ -92,7 +95,6 @@ public:
 	float TakeDamage(float DamageDealt)
 	{
 		CurrentHealth -= DamageDealt;
-		std::cout << "HIT" << std::endl;
 		return GetCurrentHealth();
 	}
 
@@ -119,12 +121,18 @@ public:
 		{
 		case 0:
 			DamageBase += 10.0f;
+			std::cout << "Damage Increased!" << std::endl;
+			std::cout << std::endl;
 			break;
 		case 1:
 			CurrentHealth += 30;
+			std::cout << "Health Increased!" << std::endl;
+			std::cout << std::endl;
 			break;
 		case 2:
 			IncreaseDefense();
+			std::cout << "Defense Increased!" << std::endl;
+			std::cout << std::endl;
 			break;
 		default:
 			std::cout << "Potion Missed" << std::endl;
@@ -199,14 +207,21 @@ int main()
 		switch (StrSwitch(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, BlockInput, PotionInput))
 		{
 		case 0:
+			std::cout << "You Attack The Zombie!" << std::endl;
+			std::cout << std::endl;
+
 			Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
 			Zombie.ChangeDamageBase(1.5f);
 			break;
 		case 1:
+			std::cout << "You Increase Your Defense" << std::endl;
+			std::cout << std::endl;
 			Player.IncreaseDefense();
 			Zombie.ChangeDamageBase(-2.5f);
 			break;
 		case 2:
+			std::cout << "You Use A Potion" << std::endl;
+			std::cout << std::endl;
 			Player.UsePotion();
 			Zombie.ChangeDamageBase(-2.5f);
 			break;
@@ -215,9 +230,10 @@ int main()
 		DisplayBattleInformation(Player, Zombie);
 		
 		//Zombie Moves
-		Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
+		std::cout << "The Zombie Attacks!" << std::endl;
+		std::cout << std::endl;
 
-		DisplayBattleInformation(Player, Zombie);
+		Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
 
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
 		if (Player.GetCurrentHealth() <= 0 || Zombie.GetCurrentHealth() <= 0)
