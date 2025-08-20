@@ -261,10 +261,38 @@ int main()
 		DisplayBattleInformation(Player, Zombie);
 		
 		//Zombie Moves
-		std::cout << "The Zombie Attacks!" << std::endl;
-		std::cout << std::endl;
 
-		Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
+		//When Zombie Should Always Attack
+		if (Zombie.GetCurrentHealth() > 30.0f)
+		{
+			std::cout << "The Zombie Attacks!" << std::endl;
+			std::cout << std::endl;
+
+			Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
+		}
+		//Randomely Increases Defense
+		else
+		{
+			switch (std::rand() % 3)
+			{
+			case 0:
+				std::cout << "The Zombie Increases Defense!" << std::endl;
+				std::cout << std::endl;
+				Zombie.IncreaseDefense();
+				break;
+			case 1:
+				std::cout << "The Zombie Uses a Potion!" << std::endl;
+				std::cout << std::endl;
+				Zombie.UsePotion();
+				break;
+			case 2:
+				std::cout << "The Zombie Attacks!" << std::endl;
+				std::cout << std::endl;
+				Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
+				break;
+			}
+
+		}
 
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
 		if (Player.GetCurrentHealth() <= 0 || Zombie.GetCurrentHealth() <= 0)
