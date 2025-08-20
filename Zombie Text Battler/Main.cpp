@@ -58,8 +58,8 @@ class Character
 	float DamageBase = 10.0f;
 	float CriticalDamageMultiplier = 2.0f;
 	int CriticalChance = 3;
-	float Defense = 1.0f;
-	float DefenseIncreaseBase = 2.5f;
+	float Defense = 2.0f;
+	float DefenseIncreaseBase = 1.5f;
 
 public:
 	Character() { }
@@ -79,16 +79,37 @@ public:
 	{
 		bool bIsCriticalHit = (std::rand() % CriticalChance == 0);
 
+		float postCalculatedDefense = EnemyDefense / 10;
+
+		if (DamageBase <= 0)
+		{
+			DamageBase = 1;
+		}
+
 		if (bIsCriticalHit)
 		{
 			std::cout << "Critical Hit!" << std::endl;
 			std::cout << std::endl;
 
-			return ((DamageBase * CriticalDamageMultiplier) - EnemyDefense >= 0) ? (DamageBase * CriticalDamageMultiplier) - EnemyDefense : 0;
+			postCalculatedDefense *= 6;
+
+			float postCalcDamage = (DamageBase * CriticalDamageMultiplier) - postCalculatedDefense;
+			if (postCalcDamage <= 0)
+			{
+				postCalcDamage = ((DamageBase * CriticalDamageMultiplier) / 10) * 4;
+			}
+			return postCalcDamage;
 		}
 		else
 		{
-			return (DamageBase - EnemyDefense >= 0) ? DamageBase - EnemyDefense : 0;
+			postCalculatedDefense *= 7.5f;
+
+			float postCalcDamage = DamageBase - postCalculatedDefense;
+			if (postCalcDamage <= 0)
+			{
+				postCalcDamage = (DamageBase / 10) * 2.0f;
+			}
+			return postCalcDamage;
 		} 
 	}
 
@@ -120,7 +141,7 @@ public:
 		switch (potionType)
 		{
 		case 0:
-			DamageBase += 10.0f;
+			DamageBase += 5.0f;
 			std::cout << "Damage Increased!" << std::endl;
 			std::cout << std::endl;
 			break;
@@ -130,6 +151,8 @@ public:
 			std::cout << std::endl;
 			break;
 		case 2:
+			IncreaseDefense();
+			IncreaseDefense();
 			IncreaseDefense();
 			std::cout << "Defense Increased!" << std::endl;
 			std::cout << std::endl;
@@ -154,9 +177,9 @@ void DisplayBattleInformation(Character& Player, Character& Zombie)
 int main()
 {
 	//Global Variables
-	const int INPUT_ARRAY_LENGTH = 10;
+	const int INPUT_ARRAY_LENGTH = 50;
 	char GlobalInput[INPUT_ARRAY_LENGTH] = {};
-	Character Player(10.0f);
+	Character Player(9.0f);
 	Character Zombie(8.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
@@ -198,7 +221,7 @@ int main()
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH)
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, PotionInput, INPUT_ARRAY_LENGTH))
 		{
-			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. Please choose wisely." << std::endl;
+			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion that can heal, increase defense 3 fold, or increase attack by typing 'potion'. Please choose wisely." << std::endl;
 			std::cout << std::endl;
 			std::cin >> GlobalInput;
 		}
@@ -211,19 +234,19 @@ int main()
 			std::cout << std::endl;
 
 			Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
-			Zombie.ChangeDamageBase(1.5f);
+			Zombie.ChangeDamageBase(1.0f);
 			break;
 		case 1:
 			std::cout << "You Increase Your Defense" << std::endl;
 			std::cout << std::endl;
 			Player.IncreaseDefense();
-			Zombie.ChangeDamageBase(-2.5f);
+			Zombie.ChangeDamageBase(-0.5f);
 			break;
 		case 2:
 			std::cout << "You Use A Potion" << std::endl;
 			std::cout << std::endl;
 			Player.UsePotion();
-			Zombie.ChangeDamageBase(-2.5f);
+			Zombie.ChangeDamageBase(1.5f);
 			break;
 		}
 
