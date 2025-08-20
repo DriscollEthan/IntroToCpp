@@ -174,7 +174,7 @@ int main()
 		char PotionInput[INPUT_ARRAY_LENGTH] = "potion";
 		while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH)
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH)
-				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH))
+				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, PotionInput, INPUT_ARRAY_LENGTH))
 		{
 			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. Please choose wisely." << std::endl;
 			std::cout << std::endl;
