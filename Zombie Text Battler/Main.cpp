@@ -59,7 +59,7 @@ class Character
 	float CriticalDamageMultiplier = 2.0f;
 	int CriticalChance = 3;
 	float Defense = 2.0f;
-	float DefenseIncreaseBase = 1.5f;
+	float DefenseIncreaseBase = 1.0f;
 	float MaxBaseDamage = 50.0f;
 
 public:
@@ -184,7 +184,7 @@ int main()
 	//Global Variables
 	const int INPUT_ARRAY_LENGTH = 50;
 	char GlobalInput[INPUT_ARRAY_LENGTH] = {};
-	Character Player(8.5f, 100000.0f);
+	Character Player(9.0f, 100000.0f);
 	Character Zombie(8.0f, 20.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
@@ -278,16 +278,18 @@ int main()
 				std::cout << "The Zombie Increases Defense!" << std::endl;
 				std::cout << std::endl;
 				Zombie.IncreaseDefense();
+				Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
 				break;
 			case 1:
 				std::cout << "The Zombie Uses a Potion!" << std::endl;
 				std::cout << std::endl;
 				Zombie.UsePotion();
+				Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
 				break;
 			case 2:
 				std::cout << "The Zombie Attacks!" << std::endl;
 				std::cout << std::endl;
-				Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
+				Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
 				break;
 			}
 
