@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_StructuresAndClasses", "
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Zombie Text Battler", "Zombie Text Battler\Zombie Text Battler.vcxproj", "{AEF55D01-C7B7-4341-81C1-4320E8F0D262}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_Constructors_Destructors", "06_Constructors_Destructors\06_Constructors_Destructors.vcxproj", "{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{AEF55D01-C7B7-4341-81C1-4320E8F0D262}.Release|x64.Build.0 = Release|x64
 		{AEF55D01-C7B7-4341-81C1-4320E8F0D262}.Release|x86.ActiveCfg = Release|Win32
 		{AEF55D01-C7B7-4341-81C1-4320E8F0D262}.Release|x86.Build.0 = Release|Win32
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Debug|x64.ActiveCfg = Debug|x64
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Debug|x64.Build.0 = Debug|x64
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Debug|x86.ActiveCfg = Debug|Win32
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Debug|x86.Build.0 = Debug|Win32
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Release|x64.ActiveCfg = Release|x64
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Release|x64.Build.0 = Release|x64
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Release|x86.ActiveCfg = Release|Win32
+		{34C6090A-1A5D-46D9-B0E1-4872C885ACF8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

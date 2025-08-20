@@ -59,9 +59,12 @@ class Character
 	float CriticalDamageMultiplier = 2.0f;
 	int CriticalChance = 3;
 	float Defense = 1.0f;
-	float DefenseIncreaseBase = 5.0f;
+	float DefenseIncreaseBase = 2.5f;
 
 public:
+	Character() { }
+	Character(float BaseDamage) { DamageBase = BaseDamage; }
+
 	float GetCurrentHealth()
 	{
 		return CurrentHealth;
@@ -145,12 +148,10 @@ int main()
 	//Global Variables
 	const int INPUT_ARRAY_LENGTH = 10;
 	char GlobalInput[INPUT_ARRAY_LENGTH] = {};
-	Character Player = {};
-	Character Zombie = {};
+	Character Player(10.0f);
+	Character Zombie(8.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
-
-	Zombie.ChangeDamageBase(-2.0f); // Change Base Damage from 10 to | 10 - 2 = 8
 		
 	//Greet Player
 	std::cout << "Welcome to the Driscoll Arena! Today we've prepared some zombies ready for a battle!" << std::endl;
