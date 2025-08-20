@@ -5,10 +5,10 @@
 
 ///	Feature List:
 ///	*Block Increases Defense vs Mitigates Damage [COMPLETE]
-/// *Potion Randomely Regains health or Buffs Damage [NEXT]
+/// *Potion Randomely Regains health or Buffs Damage [NEEDS TESTING]
+/// *Player Feedback, such as letting the player know of any Critcal Hits, What The Potion Does, etc. [DO THIS BEFORE MAKING A ZOMBIE BOT]
 ///	*Zombie Makes Realistic Choices (Besides Block)
-/// *Player Feedback, such as letting the player know of any Critcal Hits, What The Potion Does, etc.
-/// *More Randomness in this Random Generator
+/// *More Randomness in this Random Generator (I NEED SOME RESEARCH FOR THIS)
 
 
 //C-String Equal
@@ -91,6 +91,33 @@ public:
 	{
 		Defense += DefenseIncreaseBase;
 	}
+
+	void UsePotion()
+	{
+		//	Potition Types:
+		//	Increase Damage
+		//	Increase Health
+		//	Increase Defense
+
+		int potionType = std::rand() % 3;
+
+		switch (potionType)
+		{
+		case 0:
+			DamageBase += 2.0f;
+			break;
+		case 1:
+			CurrentHealth += 10;
+			break;
+		case 2:
+			IncreaseDefense();
+			break;
+		default:
+			std::cout << "Potion Missed" << std::endl;
+			std::cout << std::endl;
+			break;
+		}
+	}
 };
 
 //Extra Functions To Be Used In Battle
@@ -155,7 +182,7 @@ int main()
 		}
 
 		//Do Player's Command in Background and Display Information
-		switch (StrSwitch(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, BlockInput))
+		switch (StrSwitch(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, BlockInput, PotionInput))
 		{
 		case 0:
 			Zombie.TakeDamage(Player.GetDamage());
