@@ -113,6 +113,7 @@ int main()
 	char ReadyToPlayInput[INPUT_ARRAY_LENGTH] = "true";
 	while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, ReadyToPlayInput, INPUT_ARRAY_LENGTH))
 	{
+		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
 		std::cout << "Are you ready to fight? If you are ready type, 'true'" << std::endl;
 		std::cout << std::endl;
 		std::cin >> GlobalInput;
@@ -170,13 +171,15 @@ int main()
 	//Inform Player of Result
 	if (Zombie.GetCurrentHealth() <= 0) 
 	{
-		std::cout << "You have died fighting the Zombie. Better luck next time!" << std::endl;
+		std::cout << "You have defeated the Zombie. Can you do it faster?" << std::endl;
 	}
 
 	else
 	{
-		std::cout << "You have defeated the Zombie. Can you do it faster?" << std::endl;
+		std::cout << "You have died fighting the Zombie. Better luck next time!" << std::endl;
 	}
+
+	DisplayBattleInformation(Player, Zombie);
 
 	std::cout << std::endl;
 
