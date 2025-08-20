@@ -52,7 +52,7 @@ class Character
 	float CurrentHealth = 100.0f;
 	float DamageBase = 10.0f;
 	float CriticalDamageMultiplier = 2.0f;
-	int CriticalChance = 15;
+	int CriticalChance = 3;
 
 public:
 	float GetCurrentHealth()
@@ -62,8 +62,6 @@ public:
 
 	float GetDamage()
 	{
-		std::srand(std::time(nullptr));
-
 		bool bIsCriticalHit = (std::rand() % CriticalChance == 0);
 
 		if (bIsCriticalHit)
@@ -100,6 +98,7 @@ int main()
 	Character Player = {};
 	Character Zombie = {};
 	bool bKeepBattling = true;
+	std::srand(std::time(nullptr));
 		
 	//Greet Player
 	std::cout << "Welcome to the Driscoll Arena! Today we've prepared some zombies ready for a battle!" << std::endl;
@@ -169,7 +168,7 @@ int main()
 	}
 
 	//Inform Player of Result
-	if (Zombie.GetCurrentHealth() <= 0) 
+	if (Zombie.GetCurrentHealth() < Player.GetCurrentHealth()) 
 	{
 		std::cout << "You have defeated the Zombie. Can you do it faster?" << std::endl;
 	}
