@@ -60,10 +60,11 @@ class Character
 	int CriticalChance = 3;
 	float Defense = 2.0f;
 	float DefenseIncreaseBase = 1.5f;
+	float MaxBaseDamage = 50.0f;
 
 public:
 	Character() { }
-	Character(float BaseDamage) { DamageBase = BaseDamage; }
+	Character(float BaseDamage, float BaseMaxDamage) { DamageBase = BaseDamage; MaxBaseDamage = BaseMaxDamage; }
 
 	float GetCurrentHealth()
 	{
@@ -86,28 +87,33 @@ public:
 			DamageBase = 1;
 		}
 
+		if (DamageBase > MaxBaseDamage)
+		{
+			DamageBase = MaxBaseDamage;
+		}
+
 		if (bIsCriticalHit)
 		{
 			std::cout << "Critical Hit!" << std::endl;
 			std::cout << std::endl;
 
-			postCalculatedDefense *= 6;
+			postCalculatedDefense *= 7.0;
 
 			float postCalcDamage = (DamageBase * CriticalDamageMultiplier) - postCalculatedDefense;
 			if (postCalcDamage <= 0)
 			{
-				postCalcDamage = ((DamageBase * CriticalDamageMultiplier) / 10) * 4;
+				postCalcDamage = ((DamageBase * CriticalDamageMultiplier) / 10) * 3.0;
 			}
 			return postCalcDamage;
 		}
 		else
 		{
-			postCalculatedDefense *= 7.5f;
+			postCalculatedDefense *= 8.5f;
 
 			float postCalcDamage = DamageBase - postCalculatedDefense;
 			if (postCalcDamage <= 0)
 			{
-				postCalcDamage = (DamageBase / 10) * 2.0f;
+				postCalcDamage = (DamageBase / 10) * 1.5f;
 			}
 			return postCalcDamage;
 		} 
@@ -179,8 +185,8 @@ int main()
 	//Global Variables
 	const int INPUT_ARRAY_LENGTH = 50;
 	char GlobalInput[INPUT_ARRAY_LENGTH] = {};
-	Character Player(9.0f);
-	Character Zombie(8.0f);
+	Character Player(11.0f, 100000.0f);
+	Character Zombie(8.0f, 20.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
 		
@@ -206,10 +212,10 @@ int main()
 	while (bKeepBattling)
 	{
 		//Reset Global Variables
-		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
-
 		//Display Player Health and Zombie Health
 		DisplayBattleInformation(Player, Zombie);
+		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
+
 
 		//Prompt Player on Choices
 		// +
@@ -221,7 +227,8 @@ int main()
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH)
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, PotionInput, INPUT_ARRAY_LENGTH))
 		{
-			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion that can heal, increase defense 3 fold, or increase attack by typing 'potion'. Please choose wisely." << std::endl;
+			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. The potion can heal, increase defense 3 fold, or increase attack. Please choose wisely." << std::endl;
+
 			std::cout << std::endl;
 			std::cin >> GlobalInput;
 		}
@@ -240,6 +247,7 @@ int main()
 			std::cout << "You Increase Your Defense" << std::endl;
 			std::cout << std::endl;
 			Player.IncreaseDefense();
+
 			Zombie.ChangeDamageBase(-0.5f);
 			break;
 		case 2:
@@ -283,4 +291,13 @@ int main()
 
 	std::cout << "Thank you for playing! Please come back again soon!";
 
+	StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
+	char QuitInput[INPUT_ARRAY_LENGTH] = "quit";
+	while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, QuitInput, INPUT_ARRAY_LENGTH))
+	{
+		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
+		std::cout << "Type 'quit' to quit" << std::endl;
+		std::cout << std::endl;
+		std::cin >> GlobalInput;
+	}
 }
