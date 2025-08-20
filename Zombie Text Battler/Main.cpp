@@ -10,7 +10,6 @@
 ///	*Zombie Makes Realistic Choices (Besides Block)
 /// *More Randomness in this Random Generator (I NEED SOME RESEARCH FOR THIS)
 
-
 //C-String Equal
 bool StrEqual(char StringA[], int STRING_A_LENGTH, char StringB[], int STRING_B_LENGTH)
 {
@@ -70,6 +69,8 @@ public:
 	{
 		return CurrentHealth;
 	}
+
+	float GetBaseDamage() { return DamageBase; }
 
 	void ChangeDamageBase(float ChangeDamageBy)
 	{
@@ -214,93 +215,121 @@ int main()
 		//Display Player Health and Zombie Health
 		DisplayBattleInformation(Player, Zombie);
 		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
+		bool bIsPlayerStunned = false;
+		bool bIsZombieStunned = false;
 
 
 		//Prompt Player on Choices
 		// +
 		//Get Player's Command (Attack, Block, [TBD]Potion[TBD])
-		char AttackInput[INPUT_ARRAY_LENGTH] = "attack";
-		char BlockInput[INPUT_ARRAY_LENGTH] = "defense";
-		char PotionInput[INPUT_ARRAY_LENGTH] = "potion";
-		while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH)
+		if (!bIsPlayerStunned)
+		{
+			char AttackInput[INPUT_ARRAY_LENGTH] = "attack";
+			char BlockInput[INPUT_ARRAY_LENGTH] = "defense";
+			char PotionInput[INPUT_ARRAY_LENGTH] = "potion";
+			while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, INPUT_ARRAY_LENGTH)
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, BlockInput, INPUT_ARRAY_LENGTH)
 				&& !StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, PotionInput, INPUT_ARRAY_LENGTH))
-		{
-			std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing 'potion'. The potion can heal, increase defense 2 fold, or increase attack. Please choose wisely." << std::endl;
+			{
+				std::cout << "You may choose to attack by typing 'attack', Increase Defense by typing 'defense', or use a potion by typing	'potion'. The potion can heal, increase defense 2 fold, or increase attack. Please choose wisely." << std::endl;
 
-			std::cout << std::endl;
-			std::cin >> GlobalInput;
-		}
-
-		//Do Player's Command in Background and Display Information
-		switch (StrSwitch(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, BlockInput, PotionInput))
-		{
-		case 0:
-			std::cout << "You Attack The Zombie!" << std::endl;
-			std::cout << std::endl;
-
-			Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
-			Zombie.ChangeDamageBase(1.0f);
-			break;
-		case 1:
-			std::cout << "You Increase Your Defense" << std::endl;
-			std::cout << std::endl;
-			Player.IncreaseDefense();
-
-			Zombie.ChangeDamageBase(-0.5f);
-			break;
-		case 2:
-			std::cout << "You Use A Potion" << std::endl;
-			std::cout << std::endl;
-			Player.UsePotion();
-			Zombie.ChangeDamageBase(1.5f);
-			break;
-		}
-
-		DisplayBattleInformation(Player, Zombie);
-		
-		//Zombie Moves
-
-		//When Zombie Should Always Attack
-		if (Zombie.GetCurrentHealth() > 30.0f)
-		{
-			std::cout << "The Zombie Attacks!" << std::endl;
-			std::cout << std::endl;
-
-			Player.TakeDamage(Zombie.GetDamage(Player.GetDefense()));
-		}
-		//Randomely Increases Defense
-		else
-		{
-			switch (std::rand() % 3)
+				std::cout << std::endl;
+				std::cin >> GlobalInput;
+			}
+			float DamageToDeal = 0.0f;
+			//Do Player's Command in Background and Display Information
+			switch (StrSwitch(GlobalInput, INPUT_ARRAY_LENGTH, AttackInput, BlockInput, PotionInput))
 			{
 			case 0:
-				std::cout << "The Zombie Increases Defense!" << std::endl;
+				std::cout << "You Attack The Zombie!" << std::endl;
 				std::cout << std::endl;
-				Zombie.IncreaseDefense();
-				Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
+				DamageToDeal = Player.GetDamage(Zombie.GetDefense());
+				Zombie.TakeDamage(DamageToDeal);
+				if (DamageToDeal > Player.GetBaseDamage())
+				{
+					bIsZombieStunned = true;
+				}
+				Zombie.ChangeDamageBase(1.0f);
 				break;
 			case 1:
-				std::cout << "The Zombie Uses a Potion!" << std::endl;
+				std::cout << "You Increase Your Defense" << std::endl;
 				std::cout << std::endl;
-				Zombie.UsePotion();
-				Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
+				Player.IncreaseDefense();
+
+				Zombie.ChangeDamageBase(-0.5f);
 				break;
 			case 2:
-				std::cout << "The Zombie Attacks!" << std::endl;
+				std::cout << "You Use A Potion" << std::endl;
 				std::cout << std::endl;
-				Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
+				Player.UsePotion();
+				Zombie.ChangeDamageBase(1.5f);
 				break;
 			}
 		}
 
+		else 
+		{
+
+		}
+
+		DisplayBattleInformation(Player, Zombie);
+
+		//Zombie Moves
+
+		//When Zombie Should Always Attack
+		if (!bIsZombieStunned)
+		{
+			if (Zombie.GetCurrentHealth() > 30.0f)
+			{
+				std::cout << "The Zombie Attacks!" << std::endl;
+				std::cout << std::endl;
+
+				float DamageToDeal = Zombie.GetDamage(Player.GetDefense());
+				if (DamageToDeal > Player.GetBaseDamage())
+				{
+					bIsPlayerStunned = true;
+				}
+				Player.TakeDamage(DamageToDeal);
+			}
+			//Randomely Increases Defense
+			else
+			{
+			float DamageToDeal = 0.0f;
+				switch (std::rand() % 3)
+				{
+				case 0:
+					std::cout << "The Zombie Increases Defense!" << std::endl;
+					std::cout << std::endl;
+					Zombie.IncreaseDefense();
+					Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
+					break;
+				case 1:
+					std::cout << "The Zombie Uses a Potion!" << std::endl;
+					std::cout << std::endl;
+					Zombie.UsePotion();
+					Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
+					break;
+				case 2:
+					std::cout << "The Zombie Attacks!" << std::endl;
+					std::cout << std::endl;
+					DamageToDeal = Zombie.GetDamage(Player.GetDefense());
+					if (DamageToDeal > Player.GetBaseDamage())
+					{
+						bIsPlayerStunned = true;
+					}
+					Player.TakeDamage(DamageToDeal);
+				}
+				Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
+				break;
+			}
+		}
+	}
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
 		if (Player.GetCurrentHealth() <= 0 || Zombie.GetCurrentHealth() <= 0)
 		{
 			bKeepBattling = false;
 		}
 
-	}
 
 	//Inform Player of Result
 	if (Zombie.GetCurrentHealth() < Player.GetCurrentHealth()) 
