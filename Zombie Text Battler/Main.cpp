@@ -184,7 +184,7 @@ int main()
 	//Global Variables
 	const int INPUT_ARRAY_LENGTH = 50;
 	char GlobalInput[INPUT_ARRAY_LENGTH] = {};
-	Character Player(11.0f, 100000.0f);
+	Character Player(8.5f, 100000.0f);
 	Character Zombie(8.0f, 20.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
