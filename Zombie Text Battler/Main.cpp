@@ -323,13 +323,13 @@ int main()
 				break;
 			}
 		}
-	}
+	
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
 		if (Player.GetCurrentHealth() <= 0 || Zombie.GetCurrentHealth() <= 0)
 		{
 			bKeepBattling = false;
 		}
-
+	}
 
 	//Inform Player of Result
 	if (Zombie.GetCurrentHealth() < Player.GetCurrentHealth()) 
