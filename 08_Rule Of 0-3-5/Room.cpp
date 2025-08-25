@@ -14,10 +14,10 @@ Room::Room(size_t Width,
 	int doorHeightLocation = (bIsHeightEven) ? (Height / 2) - 1 : (Height / 2);
 
 	//Allocate HEAP Memory for the RoomLayout
-	RoomLayout = new char*[Width];
+	RoomLayout = new char*[Width + 1];
 	for (int i = 0; i < Height; ++i)
 	{
-		RoomLayout[i] = new char[Height];
+		RoomLayout[i] = new char[Height + 1];
 	}
 
 	for (int i = 0; i < Height; ++i)
@@ -82,6 +82,11 @@ Room::Room(size_t Width,
 			}
 		}
 	}
+}
+
+Room::~Room()
+{
+	delete[] RoomLayout;
 }
 
 void Room::Print(char charToPrint)

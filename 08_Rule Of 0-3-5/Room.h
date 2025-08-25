@@ -12,11 +12,10 @@ public:
 		size_t PillarWidthSpacing, 
 		size_t PillarHeightSpacing);
 
+	~Room();
+
 	//Do we need any Variables?
 	char** RoomLayout;
-	
-	//Define Functions to Setup the Room
-
 
 	//Define Function To Print the Room
 	void Print(char charToPrint);
