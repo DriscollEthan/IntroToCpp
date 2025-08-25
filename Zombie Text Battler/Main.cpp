@@ -171,6 +171,14 @@ public:
 	}
 };
 
+//bool is for Critical Hit
+bool Attack(Character* Attacker, Character* ToAttack)
+{
+	float DamageToDeal = Attacker->GetDamage(ToAttack->GetDefense());
+	ToAttack->TakeDamage(DamageToDeal);
+	return (DamageToDeal > Attacker->GetBaseDamage());
+}
+
 //Extra Functions To Be Used In Battle
 void DisplayBattleInformation(Character& Player, Character& Zombie)
 {
