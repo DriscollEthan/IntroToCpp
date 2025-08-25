@@ -189,6 +189,8 @@ int main()
 	Character Zombie(8.0f, 20.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
+	bool bIsPlayerStunned = false;
+	bool bIsZombieStunned = false;
 		
 	//Greet Player
 	std::cout << "Welcome to the Driscoll Arena! Today we've prepared some zombies ready for a battle!" << std::endl;
@@ -215,9 +217,6 @@ int main()
 		//Display Player Health and Zombie Health
 		DisplayBattleInformation(Player, Zombie);
 		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
-		bool bIsPlayerStunned = false;
-		bool bIsZombieStunned = false;
-
 
 		//Prompt Player on Choices
 		// +
@@ -249,6 +248,10 @@ int main()
 				{
 					bIsZombieStunned = true;
 				}
+				else
+				{
+					bIsZombieStunned = false;
+				}
 				Zombie.ChangeDamageBase(1.0f);
 				break;
 			case 1:
@@ -269,7 +272,8 @@ int main()
 
 		else 
 		{
-
+			std::cout << "Player is Stunned and Can Not Make a Move" << std::endl;
+			std::cout << std::endl;
 		}
 
 		DisplayBattleInformation(Player, Zombie);
@@ -285,9 +289,13 @@ int main()
 				std::cout << std::endl;
 
 				float DamageToDeal = Zombie.GetDamage(Player.GetDefense());
-				if (DamageToDeal > Player.GetBaseDamage())
+				if (DamageToDeal > Zombie.GetBaseDamage())
 				{
 					bIsPlayerStunned = true;
+				}
+				else
+				{
+					bIsPlayerStunned = false;
 				}
 				Player.TakeDamage(DamageToDeal);
 			}
@@ -313,15 +321,24 @@ int main()
 					std::cout << "The Zombie Attacks!" << std::endl;
 					std::cout << std::endl;
 					DamageToDeal = Zombie.GetDamage(Player.GetDefense());
-					if (DamageToDeal > Player.GetBaseDamage())
+					if (DamageToDeal > Zombie.GetBaseDamage())
 					{
 						bIsPlayerStunned = true;
+					}
+					else
+					{
+						bIsPlayerStunned = false;
 					}
 					Player.TakeDamage(DamageToDeal);
 				}
 				Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
 				break;
 			}
+		}
+		else
+		{
+			std::cout << "Zombie is Stunned and Can Not Make a Move" << std::endl;
+			std::cout << std::endl;
 		}
 	
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
