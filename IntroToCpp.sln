@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_Constructors_Destructors
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07_Pointers", "07_Pointers\07_Pointers.vcxproj", "{A6D47A84-8F90-47AD-9623-4CA800F52254}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08_Rule_Of_0-3-5", "08_Rule Of 0-3-5\08_Rule Of 0-3-5.vcxproj", "{18F86E18-A054-4180-AAFF-3747D702E5AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -91,6 +93,14 @@ Global
 		{A6D47A84-8F90-47AD-9623-4CA800F52254}.Release|x64.Build.0 = Release|x64
 		{A6D47A84-8F90-47AD-9623-4CA800F52254}.Release|x86.ActiveCfg = Release|Win32
 		{A6D47A84-8F90-47AD-9623-4CA800F52254}.Release|x86.Build.0 = Release|Win32
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Debug|x64.ActiveCfg = Debug|x64
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Debug|x64.Build.0 = Debug|x64
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Debug|x86.ActiveCfg = Debug|Win32
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Debug|x86.Build.0 = Debug|Win32
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Release|x64.ActiveCfg = Release|x64
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Release|x64.Build.0 = Release|x64
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Release|x86.ActiveCfg = Release|Win32
+		{18F86E18-A054-4180-AAFF-3747D702E5AA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
