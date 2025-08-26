@@ -86,14 +86,13 @@ Driscoll_String Driscoll_String::operator+(const Driscoll_String& _other) const
 	return tempString.Append(_other);
 }
 
-Driscoll_String Driscoll_String::operator+=(const Driscoll_String& _other)
+Driscoll_String& Driscoll_String::operator+=(const Driscoll_String& _other)
 {
 	return this->Append(_other);
 }
 
 bool Driscoll_String::operator==(const Driscoll_String& _other) const
 {
-
 	return this->Equals(_other);
 }
 
@@ -107,14 +106,15 @@ char& Driscoll_String::operator[](size_t _index)
 	return this->CharacterAt(_index);
 }
 
-char& Driscoll_String::operator[](size_t _index) const
+const char& Driscoll_String::operator[](size_t _index) const
 {
 	return this->CharacterAt(_index);
 }
 
 std::ostream& operator<<(std::ostream& _stream, const Driscoll_String& _string)
 {
-	// TODO: insert return statement here
+	_stream << _string.Contents;
+	return _stream;
 }
 
 /* DESCTRUCTORS */
@@ -187,19 +187,19 @@ Driscoll_String& Driscoll_String::Append(const Driscoll_String& _otherString)
 	if (TOTAL_LENGTH < (TOTAL_LENGTH + _otherString.CONTENTS_LENGTH))
 	{
 		//Allocate new Memory.
-		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH;
+		TOTAL_LENGTH += _otherString.TOTAL_LENGTH;
 		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
 
 		//Do Append Functionality
-		for (int i = 0; i < (TOTAL_LENGTH - 1); ++i)
+		for (int i = 0; i < (TOTAL_LENGTH); ++i)
 		{
-			if (i <= CONTENTS_LENGTH)
+			if ((i <= CONTENTS_LENGTH) && (CharacterAt(i) != '\0'))
 			{
 				tempPointerToNewMemory[i] = CharacterAt(i);
 			}
 			else
 			{
-				tempPointerToNewMemory[i] = _otherString.CharacterAt(i);
+				tempPointerToNewMemory[i] = _otherString.CharacterAt(i - CONTENTS_LENGTH);
 			}
 		}
 		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
@@ -214,7 +214,7 @@ Driscoll_String& Driscoll_String::Append(const Driscoll_String& _otherString)
 	else
 	{
 		//Do Append Functionality
-		for (int i = CONTENTS_LENGTH; i < (TOTAL_LENGTH - 1); ++i)
+		for (int i = CONTENTS_LENGTH; i < (TOTAL_LENGTH); ++i)
 		{
 			Contents[i] = _otherString.CharacterAt(i);
 		}
@@ -233,11 +233,12 @@ Driscoll_String& Driscoll_String::Prepend(const Driscoll_String& _otherString)
 	if (TOTAL_LENGTH < (TOTAL_LENGTH + _otherString.CONTENTS_LENGTH))
 	{
 		//Allocate new Memory.
-		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH;
+		TOTAL_LENGTH += _otherString.TOTAL_LENGTH;
 		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
 
-		//Do Append Functionality
+		//Do Prepend Functionality
 		for (int i = 0; i < (TOTAL_LENGTH - 1); ++i)
+
 		{
 			if (i <= CONTENTS_LENGTH)
 			{
@@ -246,7 +247,7 @@ Driscoll_String& Driscoll_String::Prepend(const Driscoll_String& _otherString)
 			}
 			else
 			{
-				tempPointerToNewMemory[i] = CharacterAt(i);
+				tempPointerToNewMemory[i] = CharacterAt(i - _otherString.CONTENTS_LENGTH);
 			}
 		}
 		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
@@ -320,12 +321,12 @@ int Driscoll_String::Find(const Driscoll_String& _subString)
 
 	for (int i = 0; i < GetLength(); ++i)
 	{
-		if (CharacterAt(i) == _subString.CharacterAt(i))
+		if (CharacterAt(i) == _subString.CharacterAt(x))
 		{
 			++x;
 			if (x == _subString.GetLength())
 			{
-				return i;
+				return i - _subString.GetLength() + 1;
 			}
 		}
 		else
@@ -344,7 +345,7 @@ int Driscoll_String::Find(size_t _startIndex, const Driscoll_String& _subString)
 
 	for (int i = _startIndex; i < GetLength(); ++i)
 	{
-		if (CharacterAt(i) == _subString.CharacterAt(i))
+		if (CharacterAt(i) == _subString.CharacterAt(x))
 		{
 			++x;
 			if (x == _subString.GetLength())
@@ -363,13 +364,58 @@ int Driscoll_String::Find(size_t _startIndex, const Driscoll_String& _subString)
 
 Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, const Driscoll_String& _replaceString)
 {
-	// TODO: insert return statement here
-
-	while (int index = Find(_findString) != -1)
+	//Do I need Memory Allocation?
+	if (_replaceString.GetLength() > _findString.GetLength())
 	{
-		for (int i = index; i < _replaceString.GetLength(); ++i)
+		//If we've got to this point, then we need to allocate more memory. Let's go figure that out, by the difference in Length * how many occurences of the _findString there are.
+		int occurences = 0;
+		for (int i = Find(_findString); Find(i, _findString) != -1; ++occurences)
 		{
-			Contents[i] = _replaceString.CharacterAt(i - index);
+			i = Find(i, _findString);
 		}
+
+		int difference = (occurences * (_replaceString.GetLength() - _findString.GetLength()));
+		TOTAL_LENGTH += difference;
+
+		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
+		
+		for (int i = TOTAL_LENGTH - 2; i >= 0; --i)
+		{
+			tempPointerToNewMemory[i] = Contents[i - difference];
+		}
+		for (int i = 0; i < difference; ++i)
+		{
+			tempPointerToNewMemory[i] = ' ';
+		}
+		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
+		delete[] Contents;
+		Contents = tempPointerToNewMemory;
 	}
+
+	//Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
+	size_t stringLengthRemovalAtATime = (_findString.GetLength() >= _replaceString.GetLength()) ? _findString.GetLength() : _replaceString.GetLength();
+
+	int index = Find(_findString);
+
+	while (index != -1)
+	{
+		for (int i = 0; i <= (stringLengthRemovalAtATime + index); ++i)
+		{
+			if (_replaceString.CharacterAt(i) != '\0')
+			{
+				Contents[i + index] = _replaceString.CharacterAt(i);
+			}
+			//Shift the rest of the Characters to the left!
+			else
+			{
+				for (int j = i; i < GetLength(); ++i)
+				{
+					Contents[i + index] = Contents[i + index + 1];
+				}
+			}
+		}
+		index = Find(_findString);
+	}
+
+	return *this;
 }

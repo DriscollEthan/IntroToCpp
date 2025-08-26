@@ -75,7 +75,7 @@ public:
 	Driscoll_String operator+(const Driscoll_String& _other) const;
 
 	//Creates and sets this String by Appending String b to String a (a += b)
-	Driscoll_String operator+=(const Driscoll_String& _other);
+	Driscoll_String& operator+=(const Driscoll_String& _other);
 
 	//Checks if this String is EQUAL to another String
 	bool operator==(const Driscoll_String& _other) const;
@@ -87,7 +87,7 @@ public:
 	char& operator[](size_t _index);
 
 	//Const-Qualifed Subscript Acess to the Character at Index
-	char& operator[](size_t _index) const;
+	const char& operator[](size_t _index) const;
 
 	//Support Printing to the ostream objects.
 	friend std::ostream& operator<<(std::ostream& _stream, 
