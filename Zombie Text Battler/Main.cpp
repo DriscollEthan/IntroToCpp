@@ -180,11 +180,11 @@ bool Attack(Character* Attacker, Character* ToAttack)
 }
 
 //Extra Functions To Be Used In Battle
-void DisplayBattleInformation(Character& Player, Character& Zombie)
+void DisplayBattleInformation(Character* Player, Character* Zombie)
 {
-	std::cout << "Your Current Health Is: " << Player.GetCurrentHealth() << std::endl;
+	std::cout << "Your Current Health Is: " << Player->GetCurrentHealth() << std::endl;
 	std::cout << std::endl;
-	std::cout << "The Zombie's Current Health Is:  " << Zombie.GetCurrentHealth() << std::endl;
+	std::cout << "The Zombie's Current Health Is:  " << Zombie->GetCurrentHealth() << std::endl;
 	std::cout << std::endl;
 }
 
@@ -193,8 +193,8 @@ int main()
 	//Global Variables
 	const int INPUT_ARRAY_LENGTH = 50;
 	char GlobalInput[INPUT_ARRAY_LENGTH] = {};
-	Character Player(9.0f, 100000.0f);
-	Character Zombie(8.0f, 20.0f);
+	Character* Player = new Character(9.0f, 100000.0f);
+	Character* Zombie = new Character(8.0f, 20.0f);
 	bool bKeepBattling = true;
 	std::srand(std::time(nullptr));
 	bool bIsPlayerStunned = false;
@@ -250,30 +250,21 @@ int main()
 			case 0:
 				std::cout << "You Attack The Zombie!" << std::endl;
 				std::cout << std::endl;
-				DamageToDeal = Player.GetDamage(Zombie.GetDefense());
-				Zombie.TakeDamage(DamageToDeal);
-				if (DamageToDeal > Player.GetBaseDamage())
-				{
-					bIsZombieStunned = true;
-				}
-				else
-				{
-					bIsZombieStunned = false;
-				}
-				Zombie.ChangeDamageBase(1.0f);
+				bIsZombieStunned = Attack(Player, Zombie);
+				Zombie->ChangeDamageBase(1.0f);
 				break;
 			case 1:
 				std::cout << "You Increase Your Defense" << std::endl;
 				std::cout << std::endl;
-				Player.IncreaseDefense();
+				Player->IncreaseDefense();
 
-				Zombie.ChangeDamageBase(-0.5f);
+				Zombie->ChangeDamageBase(-0.5f);
 				break;
 			case 2:
 				std::cout << "You Use A Potion" << std::endl;
 				std::cout << std::endl;
-				Player.UsePotion();
-				Zombie.ChangeDamageBase(1.5f);
+				Player->UsePotion();
+				Zombie->ChangeDamageBase(1.5f);
 				break;
 			}
 		}
@@ -291,56 +282,36 @@ int main()
 		//When Zombie Should Always Attack
 		if (!bIsZombieStunned)
 		{
-			if (Zombie.GetCurrentHealth() > 30.0f)
+			if (Zombie->GetCurrentHealth() > 30.0f)
 			{
 				std::cout << "The Zombie Attacks!" << std::endl;
 				std::cout << std::endl;
 
-				float DamageToDeal = Zombie.GetDamage(Player.GetDefense());
-				if (DamageToDeal > Zombie.GetBaseDamage())
-				{
-					bIsPlayerStunned = true;
-				}
-				else
-				{
-					bIsPlayerStunned = false;
-				}
-				Player.TakeDamage(DamageToDeal);
+				bIsPlayerStunned = Attack(Zombie, Player);
 			}
 			//Randomely Increases Defense
 			else
 			{
-			float DamageToDeal = 0.0f;
 				switch (std::rand() % 3)
 				{
 				case 0:
 					std::cout << "The Zombie Increases Defense!" << std::endl;
 					std::cout << std::endl;
-					Zombie.IncreaseDefense();
-					Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
+					Zombie->IncreaseDefense();
+					Zombie->TakeDamage((Player->GetDamage(Zombie->GetDefense()) / 2) / 2);
 					break;
 				case 1:
 					std::cout << "The Zombie Uses a Potion!" << std::endl;
 					std::cout << std::endl;
-					Zombie.UsePotion();
-					Zombie.TakeDamage((Player.GetDamage(Zombie.GetDefense()) / 2) / 2);
+					Zombie->UsePotion();
+					Zombie->TakeDamage((Player->GetDamage(Zombie->GetDefense()) / 2) / 2);
 					break;
 				case 2:
 					std::cout << "The Zombie Attacks!" << std::endl;
 					std::cout << std::endl;
-					DamageToDeal = Zombie.GetDamage(Player.GetDefense());
-					if (DamageToDeal > Zombie.GetBaseDamage())
-					{
-						bIsPlayerStunned = true;
-					}
-					else
-					{
-						bIsPlayerStunned = false;
-					}
-					Player.TakeDamage(DamageToDeal);
+					bIsPlayerStunned = Attack(Zombie, Player);
+					break;
 				}
-				Zombie.TakeDamage(Player.GetDamage(Zombie.GetDefense()));
-				break;
 			}
 		}
 		else
@@ -350,14 +321,14 @@ int main()
 		}
 	
 		//Check for Deaths (Someone Died) ? End Loop : Keep Going
-		if (Player.GetCurrentHealth() <= 0 || Zombie.GetCurrentHealth() <= 0)
+		if (Player->GetCurrentHealth() <= 0 || Zombie->GetCurrentHealth() <= 0)
 		{
 			bKeepBattling = false;
 		}
 	}
 
 	//Inform Player of Result
-	if (Zombie.GetCurrentHealth() < Player.GetCurrentHealth()) 
+	if (Zombie->GetCurrentHealth() < Player->GetCurrentHealth()) 
 	{
 		std::cout << "You have defeated the Zombie. Can you do it faster?" << std::endl;
 	}
