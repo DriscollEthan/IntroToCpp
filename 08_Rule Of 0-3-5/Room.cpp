@@ -15,11 +15,14 @@ Room::Room(size_t Width,
 
 	//Allocate HEAP Memory for the RoomLayout
 	RoomLayout = new char*[Width + 1];
+	RoomWidth = Width + 1;
+	RoomHeight = Height + 1;
 	for (int i = 0; i < Height; ++i)
 	{
 		RoomLayout[i] = new char[Height + 1];
 	}
 
+	//GENERATE ROOM
 	for (int i = 0; i < Height; ++i)
 	{
 		if (i != 0)
@@ -84,6 +87,66 @@ Room::Room(size_t Width,
 	}
 }
 
+Room::Room(const Room& Other)
+{
+	//Allocate HEAP Memory for the RoomLayout
+	RoomLayout = new char* [Other.RoomWidth + 1];
+	RoomWidth = Other.RoomWidth + 1;
+	RoomHeight = Other.RoomHeight + 1;
+	for (int i = 0; i < RoomHeight; ++i)
+	{
+		RoomLayout[i] = new char[RoomHeight + 1];
+	}
+
+	PrintRoom();
+}
+
+Room& Room::operator=(const Room& Other)
+{
+	//Allocate HEAP Memory for the RoomLayout
+	RoomLayout = new char* [Other.RoomWidth + 1];
+	RoomWidth = Other.RoomWidth + 1;
+	RoomHeight = Other.RoomHeight + 1;
+	for (int i = 0; i < RoomHeight; ++i)
+	{
+		RoomLayout[i] = new char[RoomHeight + 1];
+	}
+
+	PrintRoom();
+
+	return *this;
+}
+
+Room::Room(Room&& Other)
+{
+	//Allocate HEAP Memory for the RoomLayout
+	RoomLayout = new char* [Other.RoomWidth + 1];
+	RoomWidth = Other.RoomWidth + 1;
+	RoomHeight = Other.RoomHeight + 1;
+	for (int i = 0; i < RoomHeight; ++i)
+	{
+		RoomLayout[i] = new char[RoomHeight + 1];
+	}
+
+	PrintRoom();
+}
+
+Room& Room::operator=(Room&& Other)
+{
+	//Allocate HEAP Memory for the RoomLayout
+	RoomLayout = new char* [Other.RoomWidth + 1];
+	RoomWidth = Other.RoomWidth + 1;
+	RoomHeight = Other.RoomHeight + 1;
+	for (int i = 0; i < RoomHeight; ++i)
+	{
+		RoomLayout[i] = new char[RoomHeight + 1];
+	}
+
+	PrintRoom();
+
+	return *this;
+}
+
 Room::~Room()
 {
 	delete[] RoomLayout;
@@ -92,4 +155,15 @@ Room::~Room()
 void Room::Print(char charToPrint)
 {
 	std::cout << charToPrint;
+}
+
+void Room::PrintRoom()
+{
+	for (int i = 0; i < RoomHeight - 1; ++i)
+	{
+		for (int j = 0; j < RoomWidth - 1; ++j)
+		{
+			Print(RoomLayout[i][j]);
+		}
+	}
 }
