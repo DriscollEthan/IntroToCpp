@@ -78,16 +78,16 @@ public:
 	Driscoll_String operator+=(const Driscoll_String& _other);
 
 	//Checks if this String is EQUAL to another String
-	Driscoll_String operator==(const Driscoll_String& _other) const;
+	bool operator==(const Driscoll_String& _other) const;
 
 	//Checks if this String is NOT EQUAL to another String
-	Driscoll_String operator!=(const Driscoll_String& _other) const;
+	bool operator!=(const Driscoll_String& _other) const;
 
 	//Subscript Access to the Character at Index
-	Driscoll_String operator[](size_t _index);
+	char& operator[](size_t _index);
 
 	//Const-Qualifed Subscript Acess to the Character at Index
-	Driscoll_String operator[](size_t _index) const;
+	char& operator[](size_t _index) const;
 
 	//Support Printing to the ostream objects.
 	friend std::ostream& operator<<(std::ostream& _stream, 

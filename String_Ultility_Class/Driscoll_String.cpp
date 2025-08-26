@@ -91,24 +91,25 @@ Driscoll_String Driscoll_String::operator+=(const Driscoll_String& _other)
 	return this->Append(_other);
 }
 
-Driscoll_String Driscoll_String::operator==(const Driscoll_String& _other) const
+bool Driscoll_String::operator==(const Driscoll_String& _other) const
 {
-	return Driscoll_String();
+
+	return this->Equals(_other);
 }
 
-Driscoll_String Driscoll_String::operator!=(const Driscoll_String& _other) const
+bool Driscoll_String::operator!=(const Driscoll_String& _other) const
 {
-	return Driscoll_String();
+	return !(this->Equals(_other));
 }
 
-Driscoll_String Driscoll_String::operator[](size_t _index)
+char& Driscoll_String::operator[](size_t _index)
 {
-	return Driscoll_String();
+	return this->CharacterAt(_index);
 }
 
-Driscoll_String Driscoll_String::operator[](size_t _index) const
+char& Driscoll_String::operator[](size_t _index) const
 {
-	return Driscoll_String();
+	return this->CharacterAt(_index);
 }
 
 std::ostream& operator<<(std::ostream& _stream, const Driscoll_String& _string)
