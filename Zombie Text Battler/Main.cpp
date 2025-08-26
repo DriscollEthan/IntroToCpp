@@ -257,7 +257,7 @@ int main()
 				std::cout << "You Attack The Zombie!" << std::endl;
 				std::cout << std::endl;
 				bIsZombieStunned = Attack(Player, Zombie);
-				Zombie->ChangeDamageBase(1.0f);
+				Zombie->ChangeDamageBase(0.5f);
 				break;
 			case 1:
 				std::cout << "You Increase Your Defense" << std::endl;
@@ -270,7 +270,7 @@ int main()
 				std::cout << "You Use A Potion" << std::endl;
 				std::cout << std::endl;
 				Player->UsePotion();
-				Zombie->ChangeDamageBase(1.5f);
+				Zombie->ChangeDamageBase(1.0f);
 				break;
 			}
 		}
