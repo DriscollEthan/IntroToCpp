@@ -82,12 +82,13 @@ Driscoll_String& Driscoll_String::operator=(const Driscoll_String& _other)
 
 Driscoll_String Driscoll_String::operator+(const Driscoll_String& _other) const
 {
-	return Driscoll_String();
+	Driscoll_String tempString(Driscoll_String(*this));
+	return tempString.Append(_other);
 }
 
-Driscoll_String Driscoll_String::operator+=(const Driscoll_String& _other) const
+Driscoll_String Driscoll_String::operator+=(const Driscoll_String& _other)
 {
-	return Driscoll_String();
+	return this->Append(_other);
 }
 
 Driscoll_String Driscoll_String::operator==(const Driscoll_String& _other) const
@@ -108,6 +109,11 @@ Driscoll_String Driscoll_String::operator[](size_t _index)
 Driscoll_String Driscoll_String::operator[](size_t _index) const
 {
 	return Driscoll_String();
+}
+
+std::ostream& operator<<(std::ostream& _stream, const Driscoll_String& _string)
+{
+	// TODO: insert return statement here
 }
 
 /* DESCTRUCTORS */
@@ -175,45 +181,194 @@ bool Driscoll_String::Equals(const Driscoll_String& _otherString) const
 
 Driscoll_String& Driscoll_String::Append(const Driscoll_String& _otherString)
 {
-	// TODO: insert return statement here
+	//If We Need To Get rid of Old Memory, and create new memory to store this string and the other String. Then DO IT as done below
+	
+	if (TOTAL_LENGTH < (TOTAL_LENGTH + _otherString.CONTENTS_LENGTH))
+	{
+		//Allocate new Memory.
+		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH;
+		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
+
+		//Do Append Functionality
+		for (int i = 0; i < (TOTAL_LENGTH - 1); ++i)
+		{
+			if (i <= CONTENTS_LENGTH)
+			{
+				tempPointerToNewMemory[i] = CharacterAt(i);
+			}
+			else
+			{
+				tempPointerToNewMemory[i] = _otherString.CharacterAt(i);
+			}
+		}
+		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
+
+		//Destroy old Memory
+		delete[] Contents;
+		
+		//Update Contets Pointer to New Memory.
+		Contents = tempPointerToNewMemory;
+	}
+
+	else
+	{
+		//Do Append Functionality
+		for (int i = CONTENTS_LENGTH; i < (TOTAL_LENGTH - 1); ++i)
+		{
+			Contents[i] = _otherString.CharacterAt(i);
+		}
+	}
+
+	//Ensure that the last index has a NULL TERMINATING OPERATOR and That the CONTENTS_LENGTH is Properly Reset Then Return this String Class.
+	Contents[TOTAL_LENGTH - 1] = '\0';
+	CONTENTS_LENGTH = TOTAL_LENGTH - 1;
+	return *this;
 }
 
 Driscoll_String& Driscoll_String::Prepend(const Driscoll_String& _otherString)
 {
-	// TODO: insert return statement here
+	//If We Need To Get rid of Old Memory, and create new memory to store this string and the other String. Then DO IT as done below
+
+	if (TOTAL_LENGTH < (TOTAL_LENGTH + _otherString.CONTENTS_LENGTH))
+	{
+		//Allocate new Memory.
+		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH;
+		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
+
+		//Do Append Functionality
+		for (int i = 0; i < (TOTAL_LENGTH - 1); ++i)
+		{
+			if (i <= CONTENTS_LENGTH)
+			{
+				tempPointerToNewMemory[i] = _otherString.CharacterAt(i);
+
+			}
+			else
+			{
+				tempPointerToNewMemory[i] = CharacterAt(i);
+			}
+		}
+		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
+
+		//Destroy old Memory
+		delete[] Contents;
+
+		//Update Contets Pointer to New Memory.
+		Contents = tempPointerToNewMemory;
+	}
+
+	else
+	{
+		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH;
+
+		//Shift Current String to Fit Old String
+		for (int i = (TOTAL_LENGTH - 1); i >= _otherString.CONTENTS_LENGTH; --i)
+		{
+			Contents[i] = CharacterAt(i - _otherString.CONTENTS_LENGTH);
+		}
+
+		//Do Prepend Functionality
+		for (int i = 0; i < (_otherString.CONTENTS_LENGTH); ++i)
+		{
+			Contents[i] = _otherString.CharacterAt(i);
+		}
+	}
+
+	//Ensure that the last index has a NULL TERMINATING OPERATOR and That the CONTENTS_LENGTH is Properly Reset Then Return this String Class.
+	Contents[TOTAL_LENGTH - 1] = '\0';
+	CONTENTS_LENGTH = TOTAL_LENGTH - 1;
+	return *this;
 }
 
 const char* Driscoll_String::CStr() const
 {
-	return nullptr;
+	return Contents;
 }
 
 Driscoll_String Driscoll_String::ToLower() const
 {
+	for (int i = 0; i < GetLength(); ++i)
+	{
+		//Figure out if it's Uppercase. If So, then add 32 to make the letter Lowercase.
+		if ((CharacterAt(i) >= 65) && CharacterAt(i) <= 90)
+		{
+			Contents[i] = CharacterAt(i) + 32;
+		}
+	}
+
 	return Driscoll_String();
 }
 
 Driscoll_String Driscoll_String::ToUpper() const
 {
+	for (int i = 0; i < GetLength(); ++i)
+	{
+		//Figure out if it's Lowercase. If So, then subtract 32 to make the letter Uppercase.
+		if ((CharacterAt(i) >= 97) && CharacterAt(i) <= 122)
+		{
+			Contents[i] = CharacterAt(i) - 32;
+		}
+	}
 	return Driscoll_String();
 }
 
 int Driscoll_String::Find(const Driscoll_String& _subString)
 {
-	return 0;
+	//x is the counter to see how many letter in a row match the Subtring from this string.
+	int x = 0;
+
+	for (int i = 0; i < GetLength(); ++i)
+	{
+		if (CharacterAt(i) == _subString.CharacterAt(i))
+		{
+			++x;
+			if (x == _subString.GetLength())
+			{
+				return i;
+			}
+		}
+		else
+		{
+			x = 0;
+		}
+	}
+
+	return -1;
 }
 
 int Driscoll_String::Find(size_t _startIndex, const Driscoll_String& _subString)
 {
-	return 0;
+	//x is the counter to see how many letter in a row match the Subtring from this string.
+	int x = 0;
+
+	for (int i = _startIndex; i < GetLength(); ++i)
+	{
+		if (CharacterAt(i) == _subString.CharacterAt(i))
+		{
+			++x;
+			if (x == _subString.GetLength())
+			{
+				return i;
+			}
+		}
+		else
+		{
+			x = 0;
+		}
+	}
+
+	return -1;
 }
 
 Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, const Driscoll_String& _replaceString)
 {
 	// TODO: insert return statement here
-}
 
-std::ostream& operator<<(std::ostream& _stream, const Driscoll_String& _string)
-{
-	// TODO: insert return statement here
+	while (int index = Find(_findString) != -1)
+	{
+		for (int i = index; i < _replaceString.GetLength(); ++i)
+		{
+			Contents[i] = _replaceString.CharacterAt(i - index);
+		}
+	}
 }

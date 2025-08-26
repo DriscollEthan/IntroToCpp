@@ -75,7 +75,7 @@ public:
 	Driscoll_String operator+(const Driscoll_String& _other) const;
 
 	//Creates and sets this String by Appending String b to String a (a += b)
-	Driscoll_String operator+=(const Driscoll_String& _other) const;
+	Driscoll_String operator+=(const Driscoll_String& _other);
 
 	//Checks if this String is EQUAL to another String
 	Driscoll_String operator==(const Driscoll_String& _other) const;
