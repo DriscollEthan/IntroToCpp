@@ -3,6 +3,9 @@
 #include <ctime>
 #include "Main.h"
 
+//GLOBAL VARS
+int StunnedCounterInARow = 0;
+
 ///	Feature List:
 ///	*Block Increases Defense vs Mitigates Damage [COMPLETE]
 /// *Potion Randomely Regains health or Buffs Damage [NEEDS TESTING]
@@ -93,8 +96,9 @@ public:
 			DamageBase = MaxBaseDamage;
 		}
 
-		if (bIsCriticalHit)
+		if (bIsCriticalHit && StunnedCounterInARow <= 2)
 		{
+			++StunnedCounterInARow;
 			std::cout << "Critical Hit!" << std::endl;
 			std::cout << std::endl;
 
@@ -109,6 +113,7 @@ public:
 		}
 		else
 		{
+			StunnedCounterInARow = 0;
 			postCalculatedDefense *= 8.5f;
 
 			float postCalcDamage = DamageBase - postCalculatedDefense;
@@ -186,6 +191,7 @@ void DisplayBattleInformation(Character* Player, Character* Zombie)
 	std::cout << std::endl;
 	std::cout << "The Zombie's Current Health Is:  " << Zombie->GetCurrentHealth() << std::endl;
 	std::cout << std::endl;
+	std::cout << std::endl;
 }
 
 int main()
@@ -205,15 +211,15 @@ int main()
 	std::cout << std::endl;
 
 	//Get Player's Ok to Start Battle
-	std::cout << "Are you ready to fight? If you are ready type, 'true'" << std::endl;
+	std::cout << "Are you ready to fight? If you are ready type, 'yes'" << std::endl;
 	std::cout << std::endl;
 	std::cin >> GlobalInput;
 
-	char ReadyToPlayInput[INPUT_ARRAY_LENGTH] = "true";
+	char ReadyToPlayInput[INPUT_ARRAY_LENGTH] = "yes";
 	while (!StrEqual(GlobalInput, INPUT_ARRAY_LENGTH, ReadyToPlayInput, INPUT_ARRAY_LENGTH))
 	{
 		StrReset(GlobalInput, INPUT_ARRAY_LENGTH);
-		std::cout << "Are you ready to fight? If you are ready type, 'true'" << std::endl;
+		std::cout << "Are you ready to fight? If you are ready type, 'yes'" << std::endl;
 		std::cout << std::endl;
 		std::cin >> GlobalInput;
 	}
@@ -276,6 +282,13 @@ int main()
 		}
 
 		DisplayBattleInformation(Player, Zombie);
+
+		//Check for Deaths (Someone Died) ? End Loop : Keep Going
+		if (Player->GetCurrentHealth() <= 0 || Zombie->GetCurrentHealth() <= 0)
+		{
+			bKeepBattling = false;
+			break;
+		}
 
 		//Zombie Moves
 
