@@ -449,46 +449,6 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		  index = Find(_findString);
 		}
 	}
-
-
-
-
-	////Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
-	//size_t stringLengthRemovalAtATime = (difference > 0) ? difference : difference * -1;
-	//
-	///* FOR WHEN REPLACEMENT IS ON RIGHT OF STARTING WORD! */
-	////Get rid of the Null Terminating Operators at the Beggining
-	//while (Contents[0] == '\0')
-	//{
-	//	for (int i = 0; i < GetLength(); ++i)
-	//	{
-	//		Contents[i] = Contents[i + 1];
-	//	}
-	//}
-	//
-	////Replace the String
-	//while (Find(_findString) != -1)
-	//{
-	//	int index = Find(_findString);
-	//
-	//	for (int i = index; i < stringLengthRemovalAtATime + index; ++i)
-	//	{
-	//		if (Contents[i] != '\0')
-	//		{
-	//			Contents[i] = '\0';
-	//		}
-	//	}
-	//
-	//	for (int i = index; Contents[i] == '\0'; ++i)
-	//	{
-	//		Contents[i] = _replaceString[i - index];
-	//	}
-	//
-	//}
-	//
-	
-
-
 	Contents[TOTAL_LENGTH] = '\0';
 	return *this;
 }
