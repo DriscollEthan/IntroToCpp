@@ -8,7 +8,7 @@ int main()
 	Driscoll_String Str = "Hello World!";
 	//std::cout << Str << std::endl;
 
-	Driscoll_String StrCopy = "World B";
+	Driscoll_String StrCopy = "World B HI";
 
 	StrCopy.Replace("B", "Hello");
 	
@@ -34,7 +34,7 @@ int main()
 * ToUpper                 (GOOD)
 * Find                    (GOOD)
 * Find_StartIndex         (GOOD)
-* Replace                 (WORKING UPTO FIRST OCCURENCE)
+* Replace                 (WORKING UPTO FIRST OCCURENCE IF IT'S AFTER THE START)
 * Operator =              (GOOD)
 * Operator +              (GOOD)
 * Operator +=             (GOOD)

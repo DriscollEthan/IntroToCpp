@@ -398,6 +398,8 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 	//Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
 	size_t stringLengthRemovalAtATime = (difference > 0) ? difference : difference * -1;
 
+	/* FOR WHEN REPLACEMENT IS ON RIGHT OF STARTING WORD! */
+	//Get rid of the Null Terminating Operators at the Beggining
 	while (Contents[0] == '\0')
 	{
 		for (int i = 0; i < GetLength(); ++i)
@@ -406,6 +408,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		}
 	}
 
+	//Replace the String
 	while (Find(_findString) != -1)
 	{
 		int index = Find(_findString);
