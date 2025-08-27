@@ -187,7 +187,7 @@ Driscoll_String& Driscoll_String::Append(const Driscoll_String& _otherString)
 	if (TOTAL_LENGTH < (TOTAL_LENGTH + _otherString.CONTENTS_LENGTH))
 	{
 		//Allocate new Memory.
-		TOTAL_LENGTH += _otherString.TOTAL_LENGTH;
+		TOTAL_LENGTH += _otherString.TOTAL_LENGTH - 1;
 		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
 
 		//Do Append Functionality
@@ -233,14 +233,14 @@ Driscoll_String& Driscoll_String::Prepend(const Driscoll_String& _otherString)
 	if (TOTAL_LENGTH < (TOTAL_LENGTH + _otherString.CONTENTS_LENGTH))
 	{
 		//Allocate new Memory.
-		TOTAL_LENGTH += _otherString.TOTAL_LENGTH;
+		TOTAL_LENGTH += _otherString.TOTAL_LENGTH - 1;
 		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
 
 		//Do Prepend Functionality
 		for (int i = 0; i < (TOTAL_LENGTH - 1); ++i)
 
 		{
-			if (i <= CONTENTS_LENGTH)
+			if (i < _otherString.CONTENTS_LENGTH)
 			{
 				tempPointerToNewMemory[i] = _otherString.CharacterAt(i);
 
@@ -261,7 +261,7 @@ Driscoll_String& Driscoll_String::Prepend(const Driscoll_String& _otherString)
 
 	else
 	{
-		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH;
+		TOTAL_LENGTH += _otherString.CONTENTS_LENGTH - 1;
 
 		//Shift Current String to Fit Old String
 		for (int i = (TOTAL_LENGTH - 1); i >= _otherString.CONTENTS_LENGTH; --i)
@@ -383,7 +383,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 	{
 		TOTAL_LENGTH += difference;
 
-		char* tempPointerToNewMemory = new char[TOTAL_LENGTH + 1];
+		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
 
 		for (int i = 0; i < GetLength() + difference; ++i)
 		{
@@ -439,7 +439,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		{
 			for (int i = CONTENTS_LENGTH - 1; i >= (index + _replaceString.GetLength()); --i)
 			{
-				Contents[i] = Contents[i - (_findString.GetLength() + 1)];
+				Contents[i] = Contents[i - (difference / occurences)];
 			}
 
 			for (int i = index; i < _replaceString.GetLength() + index; ++i)
@@ -450,7 +450,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		}
 	}
 	//ENSURE THE LAST CHARACTER IS A NULL TERMINATING OPERATOR FOR SAFETY
-	Contents[TOTAL_LENGTH] = '\0';
+	Contents[TOTAL_LENGTH - 1] = '\0';
 
 	//RETURN THIS STRING.
 	return *this;
