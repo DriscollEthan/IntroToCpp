@@ -431,14 +431,15 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		}
 	}
 
+	//ELSE EVERYTHING MUST SHIFT RIGHT OF THE REPLACED STRING
 	else
 	{
 		int index = Find(_findString);
 		while (Find(_findString) != -1)
 		{
-			for (int i = index + _findString.GetLength(); i < CONTENTS_LENGTH; ++i)
+			for (int a = index + _replaceString.GetLength(); a < CONTENTS_LENGTH; ++a)
 			{
-				Contents[i] = Contents[i - 1];
+				Contents[a] = Contents[a - (_findString.GetLength() + 1)];
 			}
 
 			for (int i = index; i < _replaceString.GetLength() + index; ++i)
