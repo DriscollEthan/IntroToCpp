@@ -449,6 +449,9 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		  index = Find(_findString);
 		}
 	}
+	//ENSURE THE LAST CHARACTER IS A NULL TERMINATING OPERATOR FOR SAFETY
 	Contents[TOTAL_LENGTH] = '\0';
+
+	//RETURN THIS STRING.
 	return *this;
 }
