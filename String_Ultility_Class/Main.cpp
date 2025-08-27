@@ -1,5 +1,4 @@
 #include "Driscoll_String.h"
-#include <string>
 
 int main()
 {
@@ -7,18 +6,18 @@ int main()
 
 	/* CONSTRUCTORS AND PRINTING */
 	Driscoll_String Str = "Hello World!";
-	std::cout << Str << std::endl;
+	//std::cout << Str << std::endl;
 
-	Driscoll_String StrCopy = " Bye World!";
+	Driscoll_String StrCopy = "World B";
 
-	StrCopy.Replace("Bye", "Helllllo");
+	StrCopy.Replace("B", "Hello");
 	
 	std::cout << StrCopy;
 
 
 
 
-	return 0;
+	return 0; 
 }
 
 /* THINGS TO TESTCHECKLIST:
@@ -35,12 +34,12 @@ int main()
 * ToUpper                 (GOOD)
 * Find                    (GOOD)
 * Find_StartIndex         (GOOD)
-* Replace                 (NEEDS MEMORY ALLOCATION NOW)
+* Replace                 (NEARLY but not actaully nearly WORKING)
 * Operator =              (GOOD)
 * Operator +              (GOOD)
 * Operator +=             (GOOD)
 * Operator ==             (GOOD)
 * Operator !=             (GOOD)
-* Operator[] Get Char     ()
+* Operator[] Get Char     (GOOD)
 * Operator ostream        (GOOD)
 */

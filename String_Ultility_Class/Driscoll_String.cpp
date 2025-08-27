@@ -364,58 +364,66 @@ int Driscoll_String::Find(size_t _startIndex, const Driscoll_String& _subString)
 
 Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, const Driscoll_String& _replaceString)
 {
-	//Do I need Memory Allocation?
-	if (_replaceString.GetLength() > _findString.GetLength())
+	//Resize Memory
+	int occurences = 0;
+
+	for (int i = Find(_findString); Find(i, _findString) != -1; ++occurences)
 	{
-		//If we've got to this point, then we need to allocate more memory. Let's go figure that out, by the difference in Length * how many occurences of the _findString there are.
-		int occurences = 0;
-		for (int i = Find(_findString); Find(i, _findString) != -1; ++occurences)
-		{
-			i = Find(i, _findString);
-		}
+		i = Find(i, _findString) + 1;
+	}
 
-		int difference = (occurences * (_replaceString.GetLength() - _findString.GetLength()));
-		TOTAL_LENGTH += difference;
+	int difference = (occurences * (_replaceString.GetLength() - _findString.GetLength()));
+	TOTAL_LENGTH += difference + 10;
 
-		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
-		
-		for (int i = TOTAL_LENGTH - 2; i >= 0; --i)
+	char* tempPointerToNewMemory = new char[TOTAL_LENGTH + 1];
+
+	for (int i = GetLength() + difference; i >= 0; --i)
+	{
+		if (i - difference >= 0)
 		{
 			tempPointerToNewMemory[i] = Contents[i - difference];
 		}
-		for (int i = 0; i < difference; ++i)
+		else
 		{
-			tempPointerToNewMemory[i] = ' ';
+			tempPointerToNewMemory[i] = '\0';
 		}
-		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
-		delete[] Contents;
-		Contents = tempPointerToNewMemory;
+
 	}
+	tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
+	delete[] Contents;
+	CONTENTS_LENGTH = TOTAL_LENGTH - 1;
+	Contents = tempPointerToNewMemory;
 
 	//Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
 	size_t stringLengthRemovalAtATime = (_findString.GetLength() >= _replaceString.GetLength()) ? _findString.GetLength() : _replaceString.GetLength();
 
-	int index = Find(_findString);
-
-	while (index != -1)
+	while (Find(_findString) != -1)
 	{
-		for (int i = 0; i <= (stringLengthRemovalAtATime + index); ++i)
+		int index = Find(_findString);
+
+		for (int i = index; i < stringLengthRemovalAtATime + index; ++i)
 		{
-			if (_replaceString.CharacterAt(i) != '\0')
+			if (Contents[i] != '\0')
 			{
-				Contents[i + index] = _replaceString.CharacterAt(i);
-			}
-			//Shift the rest of the Characters to the left!
-			else
-			{
-				for (int j = i; i < GetLength(); ++i)
-				{
-					Contents[i + index] = Contents[i + index + 1];
-				}
+				Contents[i] = '\0';
 			}
 		}
-		index = Find(_findString);
+
+		for (int i = index; Contents[i] == '\0'; ++i)
+		{
+			Contents[i] = _replaceString[i - index];
+		}
+
 	}
 
+	while (Contents[0] == '\0')
+	{
+		for (int i = 0; Contents[i] == '\0'; ++i)
+		{
+			Contents[i] = ' ';
+		}
+	}
+
+	Contents[TOTAL_LENGTH] = '\0';
 	return *this;
 }
