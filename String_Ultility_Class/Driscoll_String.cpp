@@ -437,7 +437,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		int index = Find(_findString);
 		while (Find(_findString) != -1)
 		{
-			for (int i = CONTENTS_LENGTH -1; i >= index + _replaceString.GetLength(); --i)
+			for (int i = CONTENTS_LENGTH - 1; i >= (index + _replaceString.GetLength()); --i)
 			{
 				Contents[i] = Contents[i - (_findString.GetLength() + 1)];
 			}
@@ -446,7 +446,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 			{
 				Contents[i] = Contents[i] = _replaceString[i - index];
 			}
-			int index = Find(_findString);
+		  index = Find(_findString);
 		}
 	}
 
