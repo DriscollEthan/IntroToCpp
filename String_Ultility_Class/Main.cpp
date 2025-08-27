@@ -2,44 +2,9 @@
 
 int main()
 {
-	/* STRING TEST CASES: */
-
 	/* CONSTRUCTORS AND PRINTING */
 	Driscoll_String Str = "Hello World!";
-	//std::cout << Str << std::endl;
-
-	Driscoll_String StrCopy = "World BE LP BE LP";
-
-	StrCopy.Replace("BE", "Hello");
-	
-	std::cout << StrCopy;
-
-
-
+	std::cout << Str << std::endl;
 
 	return 0; 
 }
-
-/* THINGS TO TESTCHECKLIST:
-*
-* CONSTRUCTOR WITH STRING (GOOD)
-* COPY CONSTRUCTOR        (GOOD)
-* GetLength               (GOOD)
-* CharacterAt             (GOOD)
-* Equals                  (GOOD)
-* Append                  (GOOD)
-* Prepend                 (GOOD)
-* CStr                    (IDK PROABLY WORKING)
-* ToLower                 (GOOD)
-* ToUpper                 (GOOD)
-* Find                    (GOOD)
-* Find_StartIndex         (GOOD)
-* Replace                 (GOOD)
-* Operator =              (GOOD)
-* Operator +              (GOOD)
-* Operator +=             (GOOD)
-* Operator ==             (GOOD)
-* Operator !=             (GOOD)
-* Operator[] Get Char     (GOOD)
-* Operator ostream        (GOOD)
-*/
