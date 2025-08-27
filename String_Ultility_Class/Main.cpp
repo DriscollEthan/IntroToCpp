@@ -1,8 +1,60 @@
 #include "Driscoll_String.h"
+#include <fstream>
+#include <ctime>
+
+Driscoll_String WhatToPrint(bool _bool)
+{
+	if (_bool)
+	{
+		return "Successful";
+	}
+	
+	else
+	{
+		return "Failed";
+	}
+}
 
 int main()
 {
 	Driscoll_String Str = "Hello World!";
+
+	std::fstream StringTestFile;
+	StringTestFile.open("StringTestFile.txt", std::ios::out);
+	if (StringTestFile.is_open())
+	{
+		StringTestFile << "Test Cases: \n";
+	}
+	StringTestFile.close();
+
+	StringTestFile.open("StringTestFile.txt", std::ios::out);
+	if (StringTestFile.is_open())
+	{
+		StringTestFile << "Test 0 Length " << WhatToPrint(Str.GetLength() == 12) << std::endl;
+
+		StringTestFile << "Test 1 CharacterAt " << WhatToPrint(Str.CharacterAt(3) == 'l') << std::endl;
+
+		StringTestFile << "Test 2 Equals " << WhatToPrint(Str.Equals("Hello World!") && !Str.Equals("hello world!")) << std::endl;
+
+		StringTestFile << "Test 3 Append " << WhatToPrint(Str.Append(" Hi") == "Hello World! Hi") << std::endl;
+
+		StringTestFile << "Test 4 Prepend " << WhatToPrint(Str.Prepend("Hi ") == "Hi Hello World! Hi") << std::endl;
+
+		StringTestFile << "Test 5 CStr " << WhatToPrint(Str.Equals(Str.CStr())) << std::endl;
+
+		Str.ToLower();
+		StringTestFile << "Test 6 ToLower " << WhatToPrint(Str == "hi hello world! hi") << std::endl;
+
+		Str.ToUpper();
+		StringTestFile << "Test 7 ToUpper " << WhatToPrint(Str == "HI HELLO WORLD! HI") << std::endl;
+
+		StringTestFile << "Test 8 Find " << WhatToPrint(Str.Find("HI") == 0) << std::endl;
+
+		Str.Replace("HI", "bye");
+		StringTestFile << "Test 9 Replace " << WhatToPrint(Str == "bye HELLO WORLD! bye") << std::endl;
+	}
+	StringTestFile.close();
+
 	std::cout << Str << std::endl;
 
 	/*TEST CASES*/
