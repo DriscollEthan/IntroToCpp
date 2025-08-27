@@ -364,68 +364,129 @@ int Driscoll_String::Find(size_t _startIndex, const Driscoll_String& _subString)
 
 Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, const Driscoll_String& _replaceString)
 {
-	//Resize Memory
+	//Resize Memory IF NEEDED
 	int occurences = 0;
-
+	
 	for (int i = Find(_findString); Find(i, _findString) != -1; ++occurences)
 	{
 		i = Find(i, _findString) + 1;
 	}
-
+	
 	int difference = _replaceString.GetLength() - _findString.GetLength();
-	difference = occurences * difference;
-	TOTAL_LENGTH += difference;
-
-	char* tempPointerToNewMemory = new char[TOTAL_LENGTH + 1];
-
-	for (int i = GetLength() + difference; i >= 0; --i)
+	
+	for (int i = 1; i < occurences; ++i)
 	{
-		if (i - difference >= 0)
-		{
-			tempPointerToNewMemory[i] = Contents[i - difference];
-		}
-		else
-		{
-			tempPointerToNewMemory[i] = '\0';
-		}
-	}
-	tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
-	delete[] Contents;
-	CONTENTS_LENGTH = TOTAL_LENGTH - 1;
-	Contents = tempPointerToNewMemory;
-
-	//Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
-	size_t stringLengthRemovalAtATime = (difference > 0) ? difference : difference * -1;
-
-	/* FOR WHEN REPLACEMENT IS ON RIGHT OF STARTING WORD! */
-	//Get rid of the Null Terminating Operators at the Beggining
-	while (Contents[0] == '\0')
-	{
-		for (int i = 0; i < GetLength(); ++i)
-		{
-			Contents[i] = Contents[i + 1];
-		}
+		difference += (difference < 0) ? (difference * -1) : difference;
 	}
 
-	//Replace the String
-	while (Find(_findString) != -1)
+	if (difference > 0)
 	{
-		int index = Find(_findString);
+		TOTAL_LENGTH += difference;
 
-		for (int i = index; i < stringLengthRemovalAtATime + index; ++i)
+		char* tempPointerToNewMemory = new char[TOTAL_LENGTH + 1];
+
+		for (int i = 0; i < GetLength() + difference; ++i)
 		{
-			if (Contents[i] != '\0')
+			if (i < GetLength())
 			{
-				Contents[i] = '\0';
+				tempPointerToNewMemory[i] = Contents[i];
+			}
+			else
+			{
+				tempPointerToNewMemory[i] = ' ';
 			}
 		}
-
-		for (int i = index; Contents[i] == '\0'; ++i)
-		{
-			Contents[i] = _replaceString[i - index];
-		}
+		tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
+		delete[] Contents;
+		CONTENTS_LENGTH = TOTAL_LENGTH - 1;
+		Contents = tempPointerToNewMemory;
 
 	}
+
+	else
+	{
+		CONTENTS_LENGTH += difference;
+	}
+
+	//If find string is greater than replace string, everything MUST shift left.
+	if (_findString.GetLength() > _replaceString.GetLength())
+	{
+		int index = Find(_findString);
+		while (Find(_findString) != -1)
+		{
+			for (int i = index; i < _findString.GetLength() + index; ++i)
+			{
+				if ((i - index) < _replaceString.GetLength())
+				{
+					Contents[i] = _replaceString[i - index];
+				}
+
+				else
+				{
+					Contents[i] = Contents[i + 1];
+				}
+			}
+
+			int index = Find(_findString);
+		}
+	}
+
+	else
+	{
+		int index = Find(_findString);
+		while (Find(_findString) != -1)
+		{
+			for (int i = index + _findString.GetLength(); i < CONTENTS_LENGTH; ++i)
+			{
+				Contents[i] = Contents[i - 1];
+			}
+
+			for (int i = index; i < _replaceString.GetLength() + index; ++i)
+			{
+				Contents[i] = Contents[i] = _replaceString[i - index];
+			}
+			int index = Find(_findString);
+		}
+	}
+
+
+
+
+	////Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
+	//size_t stringLengthRemovalAtATime = (difference > 0) ? difference : difference * -1;
+	//
+	///* FOR WHEN REPLACEMENT IS ON RIGHT OF STARTING WORD! */
+	////Get rid of the Null Terminating Operators at the Beggining
+	//while (Contents[0] == '\0')
+	//{
+	//	for (int i = 0; i < GetLength(); ++i)
+	//	{
+	//		Contents[i] = Contents[i + 1];
+	//	}
+	//}
+	//
+	////Replace the String
+	//while (Find(_findString) != -1)
+	//{
+	//	int index = Find(_findString);
+	//
+	//	for (int i = index; i < stringLengthRemovalAtATime + index; ++i)
+	//	{
+	//		if (Contents[i] != '\0')
+	//		{
+	//			Contents[i] = '\0';
+	//		}
+	//	}
+	//
+	//	for (int i = index; Contents[i] == '\0'; ++i)
+	//	{
+	//		Contents[i] = _replaceString[i - index];
+	//	}
+	//
+	//}
+	//
+	
+
 
 	Contents[TOTAL_LENGTH] = '\0';
 	return *this;

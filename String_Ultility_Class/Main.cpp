@@ -8,9 +8,9 @@ int main()
 	Driscoll_String Str = "Hello World!";
 	//std::cout << Str << std::endl;
 
-	Driscoll_String StrCopy = "World B HI";
+	Driscoll_String StrCopy = "World BE LP";
 
-	StrCopy.Replace("B", "Hello");
+	StrCopy.Replace("BE", "Hello");
 	
 	std::cout << StrCopy;
 
