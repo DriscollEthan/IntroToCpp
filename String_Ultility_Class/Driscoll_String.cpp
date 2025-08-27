@@ -388,7 +388,6 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		{
 			tempPointerToNewMemory[i] = '\0';
 		}
-
 	}
 	tempPointerToNewMemory[TOTAL_LENGTH - 1] = '\0';
 	delete[] Contents;
