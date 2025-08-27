@@ -372,8 +372,9 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		i = Find(i, _findString) + 1;
 	}
 
-	int difference = (occurences * (_replaceString.GetLength() - _findString.GetLength()));
-	TOTAL_LENGTH += difference + 2;
+	int difference = _replaceString.GetLength() - _findString.GetLength();
+	difference = occurences * difference;
+	TOTAL_LENGTH += difference;
 
 	char* tempPointerToNewMemory = new char[TOTAL_LENGTH + 1];
 
@@ -395,7 +396,15 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 	Contents = tempPointerToNewMemory;
 
 	//Figure out which string is longer, and use that numbers to remove the strings to remove and replace them.
-	size_t stringLengthRemovalAtATime = (_findString.GetLength() >= _replaceString.GetLength()) ? _findString.GetLength() : _replaceString.GetLength();
+	size_t stringLengthRemovalAtATime = (difference > 0) ? difference : difference * -1;
+
+	while (Contents[0] == '\0')
+	{
+		for (int i = 0; i < GetLength(); ++i)
+		{
+			Contents[i] = Contents[i + 1];
+		}
+	}
 
 	while (Find(_findString) != -1)
 	{
@@ -414,14 +423,6 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 			Contents[i] = _replaceString[i - index];
 		}
 
-	}
-
-	while (Contents[0] == '\0')
-	{
-		for (int i = 0; i < GetLength(); ++i)
-		{
-			Contents[i] = Contents[i + 1];
-		}
 	}
 
 	Contents[TOTAL_LENGTH] = '\0';
