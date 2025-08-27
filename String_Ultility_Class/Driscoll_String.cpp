@@ -373,7 +373,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 	}
 
 	int difference = (occurences * (_replaceString.GetLength() - _findString.GetLength()));
-	TOTAL_LENGTH += difference + 10;
+	TOTAL_LENGTH += difference + 2;
 
 	char* tempPointerToNewMemory = new char[TOTAL_LENGTH + 1];
 
@@ -418,9 +418,9 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 
 	while (Contents[0] == '\0')
 	{
-		for (int i = 0; Contents[i] == '\0'; ++i)
+		for (int i = 0; i < GetLength(); ++i)
 		{
-			Contents[i] = ' ';
+			Contents[i] = Contents[i + 1];
 		}
 	}
 
