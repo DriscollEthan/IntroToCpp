@@ -3,6 +3,7 @@
 
 enum ItemType
 {
+	None,
 	HealthPotion,
 	DamagePotion,
 	Shield

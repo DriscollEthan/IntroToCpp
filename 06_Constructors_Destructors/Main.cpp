@@ -1,18 +1,18 @@
 #include <iostream>
 #include <string>
 
-class Player
+class APlayer
 {
 public:
-	Player()
+	APlayer()
 	{
 		std::cout << "Player Created!" << std::endl;
 	}
 
-	~Player() { }
+	~APlayer() { }
 };
 
 int main()
 {
-	Player John;
+	APlayer John;
 }

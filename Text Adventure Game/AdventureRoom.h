@@ -2,14 +2,6 @@
 #include "Driscoll_String.h"
 #include "Item.h"
 
-enum RoomDirection
-{
-	Up,
-	Down,
-	Left,
-	Right
-};
-
 class AdventureRoom
 {
 public:

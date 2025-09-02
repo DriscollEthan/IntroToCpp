@@ -51,6 +51,9 @@
     <ClCompile Include="..\String_Ultility_Class\Driscoll_String.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HealthPotion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="GDD.txt">
@@ -77,6 +80,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Driscoll_String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthPotion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

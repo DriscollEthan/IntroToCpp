@@ -2,6 +2,9 @@
 
 Item::Item()
 {
+	ItemName = "NULL";
+	ItemDescription = "NULL";
+	Type = None;
 }
 
 Item::Item(const Item& _other)
