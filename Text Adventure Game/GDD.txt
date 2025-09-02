@@ -4,7 +4,7 @@ Classes:
 		Will keep track of input and divy out where to go.
 
 	Room:
-		Items Currently Inside Room and Is Taken or Not.
+		Items Currently Inside Room and Is Taken or Not. Has Spells, and Is Taken?
 
 	Player:
 		Inventory of Items, Spells, Health, (DEBATABLE: Mana?), 
@@ -13,9 +13,13 @@ Classes:
 		Spells, Health, Damage
 
 	Item:
+		NEED:
+		COPY CONSTRUCTOR AND ASSIGNMENT
 		Description and Usecase.
 
 	Spell:
+		NEED:
+		COPY CONSTRUCTOR AND ASSIGNMENT
 		Description, Usecase, anything Special
 
 Rooms:
@@ -42,13 +46,13 @@ Rooms:
 
 	LAYOUT:
 
-						Final Boss
+						[2]Final Boss
 							^
 							|
-		Armory -> Connecting Room <- The Altar
+		[5]Armory -> [1]Connecting Room <- [6]The Altar
 							^
 							|
-Witch's Brewing Room -> Start Room <- Wizards Lair
+[3]Witch's Brewing Room -> [0]Start Room <- [4]Wizards Lair
 
 Items:
 	Health Potion:

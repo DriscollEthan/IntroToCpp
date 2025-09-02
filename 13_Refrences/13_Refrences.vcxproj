@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{57cf67b2-72d9-4171-a01e-547fbecba2b3}</ProjectGuid>
-    <RootNamespace>TextAdventureGame</RootNamespace>
+    <ProjectGuid>{80962ff2-256a-411d-9c4e-d95c0625917a}</ProjectGuid>
+    <RootNamespace>My13Refrences</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>_Text Adventure Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -128,26 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\String_Ultility_Class\Driscoll_String.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="AdventureRoom.cpp" />
-    <ClCompile Include="Spell.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="GDD.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Driscoll_String.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="Item.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="AdventureRoom.h" />
-    <ClInclude Include="Spell.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
