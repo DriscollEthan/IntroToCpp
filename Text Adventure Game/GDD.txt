@@ -1,3 +1,75 @@
 Classes:
+	Game Class:
+		Game Loop which will keep track of ALL Rooms, CURRENT ROOM, and the Player AT ALL TIMES\
+		Will keep track of input and divy out where to go.
 
+	Room:
+		Items Currently Inside Room and Is Taken or Not.
+
+	Player:
+		Inventory of Items, Spells, Health, (DEBATABLE: Mana?), 
+
+	Enemy:
+		Spells, Health, Damage
+
+	Item:
+		Description and Usecase.
+
+	Spell:
+		Description, Usecase, anything Special
+
+Rooms:
+	Start Room:
+		Begin here with a basic Fireball Spell.
+
+	Item Collection Room 1: Witch's Brewing Room:
+		Collect a "Healt Potion" Item Here;
+
+	Item Collection Room 2: Wizards Lair:
+		Collect a "Damage Potion" Item Here;
+
+	Item Collection Room 3: Armory:
+		Collect a "Shield" Item Here;
+
+	Spell Learning Room: The Altar:
+		Learn another Damaging Spell Here.
 	
+	Final Boss:
+		Use Spell(s) and Item(s) to fight a final Zombie.
+
+	End Room:
+		Win Room.
+
+	LAYOUT:
+
+						Final Boss
+							^
+							|
+		Armory -> Connecting Room <- The Altar
+							^
+							|
+Witch's Brewing Room -> Start Room <- Wizards Lair
+
+Items:
+	Health Potion:
+		Giveback 50% Health for one turn.
+
+	Damage Potion:
+		Extra 50% Damage for one turn.
+
+	Shield:
+		Block 1 hit for one turn, but deal zero damage.
+
+Spells:
+() = Subject To Be Changed for Balancing Purposes
+	Fireball:
+		Base Spell that does (25) Damage To Enemy.
+
+	Lighting:
+		Stuns Enemy for a turn and does (40) Damage To Enemy -- BUT Takes 2 Turn to Recharge.
+
+	Poison:
+		Does (10) Base Damage to an Enemy and (15) Damage over the next 2 Turns -- BUT Takes 3 Turns to Recharge.
+
+	Curse:
+		Does (15) Base Damage to an Enemy and Cuts the Enemy Damage by (50%) for the next 2 Turns --  BUT Takes 3 Turns to Recharge.
