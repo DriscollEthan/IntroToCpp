@@ -178,7 +178,7 @@ void GameManager::Update()
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[6];
 			}
-			else if (strInput.Find("down"))
+			else if (strInput.Find("down") != -1)
 			{
 				Print("You move to the room on the bottom.");
 				CurrentRoom = AllRooms[0];

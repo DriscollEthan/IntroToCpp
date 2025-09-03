@@ -101,5 +101,5 @@ void AdventureRoom::SetRoomID(int _newID)
 
 void AdventureRoom::SetItemTaken(bool _bIsItemTaken)
 {
-	bIsItemTakeable = _bIsItemTaken;
+	bIsItemTakeable = (!_bIsItemTaken);
 }
