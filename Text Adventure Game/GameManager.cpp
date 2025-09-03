@@ -1,5 +1,11 @@
 #include "GameManager.h"
 #include "Driscoll_String.h"
+#include "DamagePotion.h"
+#include "HealthPotion.h"
+#include "Shield.h"
+#include "Lighting.h"
+#include "Poison.h"
+#include "Curse.h"
 
 void Print(Driscoll_String _text)
 {
@@ -33,17 +39,17 @@ GameManager::GameManager()
 			break;
 		case 3:
 			//WITCH'S BREWING ROOM
-			AllRooms[i] = AdventureRoom(Item(), true, "Brewing Room");
+			AllRooms[i] = AdventureRoom(HealthPotion(), true, "Brewing Room");
 			AllRooms[i].SetRoomID(i);
 			break;
 		case 4:
 			//WIZARD'S LAIR
-			AllRooms[i] = AdventureRoom(Item(), true, "Lair");
+			AllRooms[i] = AdventureRoom(DamagePotion(), true, "Lair");
 			AllRooms[i].SetRoomID(i);
 			break;
 		case 5:
 			//ARMORY
-			AllRooms[i] = AdventureRoom(Item(), true, "Armory");
+			AllRooms[i] = AdventureRoom(Shield(), true, "Armory");
 			AllRooms[i].SetRoomID(i);
 			break;
 		case 6:
@@ -209,7 +215,7 @@ void GameManager::Update()
 			if (CurrentRoom.GetItem() != nullptr)
 			{
 				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
-				Print("You may grab the item by typing, \n 0. Retrieve")
+				Print("You may grab the item by typing, \n 0. Retrieve");
 			}
 			Print("To switch rooms by typing: \n 1. Right");
 			Print("You may also check your inventory by typing: \n 2. Inventory");
@@ -230,7 +236,7 @@ void GameManager::Update()
 			}
 			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
 			{
-					Print("You acquired a " + CurrentRoom.GetItemName());
+					Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 					CurrentPlayer->AddItem(CurrentRoom.GetItem());
 			}
 			else if (strInput.Find("inventory") != -1)
@@ -259,7 +265,7 @@ void GameManager::Update()
 			if (CurrentRoom.GetItem() != nullptr)
 			{
 				Print("This room has a tiny potion located in the corner on a shelf. \n It appears to have a red liquid inside of it.");
-				Print("You may grab the item by typing, \n 0. Retrieve")
+				Print("You may grab the item by typing, \n 0. Retrieve");
 			}
 			Print("To switch rooms by typing: \n 1. Left");
 			Print("You may also check your inventory by typing: \n 2. Inventory");
@@ -280,7 +286,7 @@ void GameManager::Update()
 			}
 			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
 			{
-				Print("You acquired a " + CurrentRoom.GetItemName());
+				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
 			}
 			else if (strInput.Find("inventory") != -1)
@@ -308,8 +314,8 @@ void GameManager::Update()
 			//ARMORY
 			if (CurrentRoom.GetItem() != nullptr)
 			{
-				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
-				Print("You may grab the item by typing, \n 0. Retrieve")
+				Print("This room has a lot of locked lockers on the outskirts of the room. \n In the middle of the room you find an open locker with a shield inside.");
+				Print("You may grab the item by typing, \n 0. Retrieve");
 			}
 			Print("To switch rooms by typing: \n 3. Right");
 			Print("You may also check your inventory by typing: \n 5. Inventory");
@@ -330,7 +336,7 @@ void GameManager::Update()
 			}
 			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
 			{
-				Print("You acquired a " + CurrentRoom.GetItemName());
+				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
 			}
 			else if (strInput.Find("inventory") != -1)
@@ -356,12 +362,12 @@ void GameManager::Update()
 			break;
 		case 6:
 			//THE ALTAR
-			if (CurrentRoom.GetItem() != nullptr)
+			if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == NONE)
 			{
-				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
-				Print("You may grab the item by typing, \n 0. Retrieve")
+				Print("This room has a big altar in the middle, with a spellbook on the reading stand. \n You walk upto the spellbook and on the first page you figure out how you can learn a new spell.");
+				Print("You may learn a new spell by typing, \n 1. Lighting \n 2. Poison \n 3. Curse");
 			}
-			Print("To switch rooms by typing: \n 1. Left");
+			Print("To switch rooms by typing: \n 4. Left");
 			Print("You may also check your inventory by typing: \n 5. Inventory");
 			Print("You may quit by typing: \n 6. Quit");
 			std::cin >> input;
@@ -378,10 +384,20 @@ void GameManager::Update()
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if (strInput.Find("lighting") != -1)
 			{
-				Print("You acquired a " + CurrentRoom.GetItemName());
-				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+				Print("You learned the Lighting Spell.");
+				CurrentPlayer->LearnSpell(Lighting());
+			}
+			else if (strInput.Find("poison") != -1)
+			{
+				Print("You learned the Poison Spell.");
+				CurrentPlayer->LearnSpell(Poison());
+			}
+			else if (strInput.Find("curse") != -1)
+			{
+				Print("You learned the Curse Spell.");
+				CurrentPlayer->LearnSpell(Curse());
 			}
 			else if (strInput.Find("inventory") != -1)
 			{

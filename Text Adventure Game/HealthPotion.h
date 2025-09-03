@@ -4,6 +4,7 @@
 
 class HealthPotion : public Item
 {
+public:
 	HealthPotion();
 };
 

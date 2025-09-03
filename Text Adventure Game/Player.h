@@ -1,6 +1,7 @@
 #pragma once
 #include "Item.h"
 #include "Spell.h"
+#include "Fireball.h"
 
 class Player
 {

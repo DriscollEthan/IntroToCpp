@@ -10,7 +10,7 @@ Player::Player()
 
 	SpellsLearned = new Spell[2];
 	//FIREBALL
-	SpellsLearned[0] = Spell();
+	SpellsLearned[0] = Fireball();
 	SpellsLearned[1] = Spell();
 
 	Health = 100.0f;
