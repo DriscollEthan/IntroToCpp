@@ -75,13 +75,13 @@ Spell* Player::GetSpellsLeanred()
 	return SpellsLearned;
 }
 
-void Player::AddItem(Item _itemToAdd)
+void Player::AddItem(Item* _itemToAdd)
 {
 	for (int i = 0; i < 3; ++i)
 	{
 		if (ItemsCollected[i].GetItemType() == None)
 		{
-			ItemsCollected[i] = _itemToAdd;
+			ItemsCollected[i] = (*_itemToAdd);
 			break;
 		}
 	}

@@ -124,21 +124,150 @@ void GameManager::Update()
 			else if (strInput.Find("inventory") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
-				for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+				if (inventory[0].GetItemType() == NONE)
 				{
-					Print(inventory[i].GetItemName());
-					Print(inventory[i].GetItemDescription());
+					Print("There is nothing in your inventory.");
 				}
+				else
+				{
+					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					{
+						Print(inventory[i].GetItemName());
+						Print(inventory[i].GetItemDescription());
+					}
+				}
+			}
+			else
+			{
+				Print("Please type a valid Command.");
 			}
 			break;
 		case 1:
 			//CONNECTING ROOM
+			Print("This is just the hallway that will connect you to the rest of the dungeon.");
+			Print("To switch rooms by typing: \n 1. Left \n 2. Up (BOSS ROOM) \n 3. Right \n 4. Down");
+			Print("You may also check your inventory by typing: \n 5. Inventory");
+			Print("You may quit by typing: \n 6. Quit");
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput.Find("quit") != -1)
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
+			else if (strInput.Find("left") != -1)
+			{
+				Print("You move to the room on the left.");
+				CurrentRoom = AllRooms[5];
+			}
+			else if (strInput.Find("up") != -1)
+			{
+				Print("You move to the room on the top.");
+				CurrentRoom = AllRooms[2];
+			}
+			else if (strInput.Find("right") != -1)
+			{
+				Print("You move to the room on the right.");
+				CurrentRoom = AllRooms[6];
+			}
+			else if (strInput.Find("down"))
+			{
+				Print("You move to the room on the bottom.");
+				CurrentRoom = AllRooms[0];
+			}
+			else if (strInput.Find("inventory") != -1)
+			{
+				Item* inventory = CurrentPlayer->GetInventory();
+				if (inventory[0].GetItemType() == NONE)
+				{
+					Print("There is nothing in your inventory.");
+				}
+				else
+				{
+					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					{
+						Print(inventory[i].GetItemName());
+						Print(inventory[i].GetItemDescription());
+					}
+				}
+			}
+			else
+			{
+				Print("Please type a valid Command.");
+			}
 			break;
 		case 2:
 			//FINAL BOSS ROOM
+			Print("'HAHAHA' cackles the witch. 'It's time to fight my new Giant Skeleton! Don't worry, it's won every fight so far! HAHAHAHA'");
+			Print("'Best of luck my Wizard. Use your spells and items to survive, and I'll see you on the other side of this mansion.'");
+			bIsExploring = false;
 			break;
 		case 3:
 			//WITCH'S BREWING ROOM
+			if (CurrentRoom.GetItem() != nullptr)
+			{
+				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
+				Print("You may grab the item by typing, \n 0. Retrieve")
+			}
+			Print("To switch rooms by typing: \n 1. Left \n 2. Up (BOSS ROOM) \n 3. Right \n 4. Down");
+			Print("You may also check your inventory by typing: \n 5. Inventory");
+			Print("You may quit by typing: \n 6. Quit");
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput.Find("quit") != -1)
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
+			else if (strInput.Find("left") != -1)
+			{
+				Print("You move to the room on the left.");
+				CurrentRoom = AllRooms[5];
+			}
+			else if (strInput.Find("up") != -1)
+			{
+				Print("You move to the room on the top.");
+				CurrentRoom = AllRooms[2];
+			}
+			else if (strInput.Find("right") != -1)
+			{
+				Print("You move to the room on the right.");
+				CurrentRoom = AllRooms[6];
+			}
+			else if (strInput.Find("down"))
+			{
+				Print("You move to the room on the bottom.");
+				CurrentRoom = AllRooms[0];
+			}
+			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
+			{
+					Print("You acquired a " + CurrentRoom.GetItemName());
+					CurrentPlayer->AddItem(CurrentRoom.GetItem());
+			}
+			else if (strInput.Find("inventory") != -1)
+			{
+				Item* inventory = CurrentPlayer->GetInventory();
+				if (inventory[0].GetItemType() == NONE)
+				{
+					Print("There is nothing in your inventory.");
+				}
+				else
+				{
+					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					{
+						Print(inventory[i].GetItemName());
+						Print(inventory[i].GetItemDescription());
+					}
+				}
+			}
+			else
+			{
+				Print("Please type a valid Command.");
+			}
 			break;
 		case 4:
 			//WIZARD'S LAIR
@@ -150,6 +279,7 @@ void GameManager::Update()
 			//THE ALTAR
 			break;
 		}
+		Print("======================================================================================================");
 	}
 	else
 	{

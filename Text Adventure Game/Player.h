@@ -36,7 +36,7 @@ public:
 
 	Spell* GetSpellsLeanred();
 
-	void AddItem(Item _itemToAdd);
+	void AddItem(Item* _itemToAdd);
 
 	void LearnSpell(Spell _spellToLearn);
 };
