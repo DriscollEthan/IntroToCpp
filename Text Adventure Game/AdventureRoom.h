@@ -14,18 +14,22 @@ public:
 
 	AdventureRoom(const bool _bIsSpellRoom, Driscoll_String _roomName);
 
+	AdventureRoom(const AdventureRoom& _other);
+
+	AdventureRoom operator=(const AdventureRoom& _other);
+
 	//Destructors
 	~AdventureRoom();
 
 protected:
 	//Variables
-	Item* ItemInRoom;
+	Item ItemInRoom;
 
 	bool bIsItemTakeable;
 
 	Driscoll_String RoomName;
 
-	bool bIsSpellRoom = false;
+	bool bIsSpellRoom;
 
 	int RoomID;
 

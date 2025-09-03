@@ -77,3 +77,6 @@ Spells:
 
 	Curse:
 		Does (15) Base Damage to an Enemy and Cuts the Enemy Damage by (50%) for the next 2 Turns --  BUT Takes 3 Turns to Recharge.
+
+
+		Exception thrown at 0x00007FFA4561030E (ucrtbased.dll) in _Text Adventure Game.exe: 0xC0000005: Access violation reading location 0xFFFFFFFFFFFFFFF0.

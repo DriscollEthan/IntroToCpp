@@ -1,9 +1,15 @@
 #include "GameManager.h"
+#include "Driscoll_String.h"
+
+void Print(Driscoll_String _text)
+{
+	std::cout << _text << std::endl;
+}
 
 GameManager::GameManager()
 {
-	AllRooms = new AdventureRoom[7];
 	ALLROOMS_LENGTH = 7;
+	AllRooms = new AdventureRoom[ALLROOMS_LENGTH];
 
 	//Create the Rooms
 	for (int i = 0; i < ALLROOMS_LENGTH; ++i)
@@ -75,16 +81,55 @@ void GameManager::BeginPlay()
 
 void GameManager::Update()
 {
-	char Input[256];
+	char input[256];
+	Driscoll_String strInput;
 
 	if (bIsExploring)
 	{
 		//Exploring Sequences
+		std::cout << "You are in the ";
+		Print(CurrentRoom.GetRoomName());
 		switch (CurrentRoom.GetRoomID())
 		{
 		case 0:
 			//START ROOM
-			
+			Print("You have acquired the Fireball Spell. \n You may now move to another room.");
+			Print("To switch rooms by typing: \n 1. Left \n 2. Up \n 3. Right");
+			Print("You may also check your inventory by typing: \n 4. Inventory");
+			Print("You may quit by typing: \n 5. Quit");
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput.Find("quit") != -1)
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
+			else if (strInput.Find("left") != -1)
+			{
+				Print("You move to the room on the left.");
+				CurrentRoom = AllRooms[3];
+			}
+			else if (strInput.Find("up") != -1)
+			{
+				Print("You move to the room on the top.");
+				CurrentRoom = AllRooms[1];
+			}
+			else if (strInput.Find("right") != -1)
+			{
+				Print("You move to the room on the right.");
+				CurrentRoom = AllRooms[4];
+			}
+			else if (strInput.Find("inventory") != -1)
+			{
+				Item* inventory = CurrentPlayer->GetInventory();
+				for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+				{
+					Print(inventory[i].GetItemName());
+					Print(inventory[i].GetItemDescription());
+				}
+			}
 			break;
 		case 1:
 			//CONNECTING ROOM
@@ -111,3 +156,4 @@ void GameManager::Update()
 		//Combat Sequence
 	}
 }
+

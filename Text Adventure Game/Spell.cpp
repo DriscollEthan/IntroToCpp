@@ -2,8 +2,8 @@
 
 Spell::Spell()
 {
-	SpellName = "NULL";
-	SpellDescription = "NULL";
+	SpellName = "NONE";
+	SpellDescription = "NONE";
 	Type = NONE;
 	Damage = 0.0f;
 	DamageOverTime = 0.0f;

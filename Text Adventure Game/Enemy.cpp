@@ -2,7 +2,7 @@
 
 Enemy::Enemy()
 {
-	Health == 100.0f;
+	Health = 100.0f;
 	bIsStunned = false;
 }
 

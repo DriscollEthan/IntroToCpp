@@ -123,8 +123,11 @@ std::ostream& operator<<(std::ostream& _stream, const Driscoll_String& _string)
 
 Driscoll_String::~Driscoll_String()
 {
-	delete[] Contents;
-	Contents = nullptr;
+	if (Contents != nullptr)
+	{
+		delete[] Contents;
+		Contents = nullptr;
+	}
 	TOTAL_LENGTH = 0;
 	CONTENTS_LENGTH = 0;
 }

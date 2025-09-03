@@ -12,6 +12,7 @@ int main()
 	{
 		//BEGIN
 		Game->Update();
+		bKeepPlaying = Game->bIsKeepPlaying;
 	}
 
 	delete Game;
