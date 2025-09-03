@@ -46,12 +46,12 @@ Rooms:
 
 	LAYOUT:
 
-						[2]Final Boss
-							^
-							|
-		[5]Armory -> [1]Connecting Room <- [6]The Altar
-							^
-							|
+														[2]Final Boss
+																	^
+																	|
+						[5]Armory -> [1]Connecting Room <- [6]The Altar
+																	^
+																	|
 [3]Witch's Brewing Room -> [0]Start Room <- [4]Wizards Lair
 
 Items:

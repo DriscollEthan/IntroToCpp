@@ -211,9 +211,9 @@ void GameManager::Update()
 				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
 				Print("You may grab the item by typing, \n 0. Retrieve")
 			}
-			Print("To switch rooms by typing: \n 1. Left \n 2. Up (BOSS ROOM) \n 3. Right \n 4. Down");
-			Print("You may also check your inventory by typing: \n 5. Inventory");
-			Print("You may quit by typing: \n 6. Quit");
+			Print("To switch rooms by typing: \n 1. Right");
+			Print("You may also check your inventory by typing: \n 2. Inventory");
+			Print("You may quit by typing: \n 3. Quit");
 			std::cin >> input;
 			strInput = input;
 			strInput.ToLower();
@@ -223,24 +223,9 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("left") != -1)
-			{
-				Print("You move to the room on the left.");
-				CurrentRoom = AllRooms[5];
-			}
-			else if (strInput.Find("up") != -1)
-			{
-				Print("You move to the room on the top.");
-				CurrentRoom = AllRooms[2];
-			}
 			else if (strInput.Find("right") != -1)
 			{
 				Print("You move to the room on the right.");
-				CurrentRoom = AllRooms[6];
-			}
-			else if (strInput.Find("down"))
-			{
-				Print("You move to the room on the bottom.");
 				CurrentRoom = AllRooms[0];
 			}
 			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
@@ -271,12 +256,153 @@ void GameManager::Update()
 			break;
 		case 4:
 			//WIZARD'S LAIR
+			if (CurrentRoom.GetItem() != nullptr)
+			{
+				Print("This room has a tiny potion located in the corner on a shelf. \n It appears to have a red liquid inside of it.");
+				Print("You may grab the item by typing, \n 0. Retrieve")
+			}
+			Print("To switch rooms by typing: \n 1. Left");
+			Print("You may also check your inventory by typing: \n 2. Inventory");
+			Print("You may quit by typing: \n 3. Quit");
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput.Find("quit") != -1)
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
+			else if (strInput.Find("left") != -1)
+			{
+				Print("You move to the room on the left.");
+				CurrentRoom = AllRooms[0];
+			}
+			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
+			{
+				Print("You acquired a " + CurrentRoom.GetItemName());
+				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+			}
+			else if (strInput.Find("inventory") != -1)
+			{
+				Item* inventory = CurrentPlayer->GetInventory();
+				if (inventory[0].GetItemType() == NONE)
+				{
+					Print("There is nothing in your inventory.");
+				}
+				else
+				{
+					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					{
+						Print(inventory[i].GetItemName());
+						Print(inventory[i].GetItemDescription());
+					}
+				}
+			}
+			else
+			{
+				Print("Please type a valid Command.");
+			}
 			break;
 		case 5:
 			//ARMORY
+			if (CurrentRoom.GetItem() != nullptr)
+			{
+				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
+				Print("You may grab the item by typing, \n 0. Retrieve")
+			}
+			Print("To switch rooms by typing: \n 3. Right");
+			Print("You may also check your inventory by typing: \n 5. Inventory");
+			Print("You may quit by typing: \n 6. Quit");
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput.Find("quit") != -1)
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
+			else if (strInput.Find("right") != -1)
+			{
+				Print("You move to the room on the right.");
+				CurrentRoom = AllRooms[1];
+			}
+			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
+			{
+				Print("You acquired a " + CurrentRoom.GetItemName());
+				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+			}
+			else if (strInput.Find("inventory") != -1)
+			{
+				Item* inventory = CurrentPlayer->GetInventory();
+				if (inventory[0].GetItemType() == NONE)
+				{
+					Print("There is nothing in your inventory.");
+				}
+				else
+				{
+					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					{
+						Print(inventory[i].GetItemName());
+						Print(inventory[i].GetItemDescription());
+					}
+				}
+			}
+			else
+			{
+				Print("Please type a valid Command.");
+			}
 			break;
 		case 6:
 			//THE ALTAR
+			if (CurrentRoom.GetItem() != nullptr)
+			{
+				Print("This room has a big pot in the middle filled with some green liquid. \n There is an empty bottle on the table next to the pot.");
+				Print("You may grab the item by typing, \n 0. Retrieve")
+			}
+			Print("To switch rooms by typing: \n 1. Left");
+			Print("You may also check your inventory by typing: \n 5. Inventory");
+			Print("You may quit by typing: \n 6. Quit");
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput.Find("quit") != -1)
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
+			else if (strInput.Find("left") != -1)
+			{
+				Print("You move to the room on the left.");
+				CurrentRoom = AllRooms[1];
+			}
+			else if ((strInput.Find("retrieve") != -1) && CurrentRoom.GetItem() != nullptr)
+			{
+				Print("You acquired a " + CurrentRoom.GetItemName());
+				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+			}
+			else if (strInput.Find("inventory") != -1)
+			{
+				Item* inventory = CurrentPlayer->GetInventory();
+				if (inventory[0].GetItemType() == NONE)
+				{
+					Print("There is nothing in your inventory.");
+				}
+				else
+				{
+					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					{
+						Print(inventory[i].GetItemName());
+						Print(inventory[i].GetItemDescription());
+					}
+				}
+			}
+			else
+			{
+				Print("Please type a valid Command.");
+			}
 			break;
 		}
 		Print("======================================================================================================");
