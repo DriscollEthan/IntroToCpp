@@ -48,6 +48,8 @@ public:
 	int GetRoomID();
 
 	void SetRoomID(int _newID);
+
+	void SetItemTaken(bool _bIsItemTaken);
 };
 
 

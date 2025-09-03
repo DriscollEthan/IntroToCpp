@@ -98,3 +98,8 @@ void AdventureRoom::SetRoomID(int _newID)
 {
 	RoomID = _newID;
 }
+
+void AdventureRoom::SetItemTaken(bool _bIsItemTaken)
+{
+	bIsItemTakeable = _bIsItemTaken;
+}

@@ -238,6 +238,7 @@ void GameManager::Update()
 			{
 					Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 					CurrentPlayer->AddItem(CurrentRoom.GetItem());
+					CurrentRoom.SetItemTaken(true);
 			}
 			else if (strInput.Find("inventory") != -1)
 			{
@@ -288,6 +289,7 @@ void GameManager::Update()
 			{
 				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+				CurrentRoom.SetItemTaken(true);
 			}
 			else if (strInput.Find("inventory") != -1)
 			{
@@ -338,6 +340,7 @@ void GameManager::Update()
 			{
 				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+				CurrentRoom.SetItemTaken(true);
 			}
 			else if (strInput.Find("inventory") != -1)
 			{
