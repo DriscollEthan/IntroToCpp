@@ -240,7 +240,7 @@ void GameManager::Update()
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[0];
 			}
-			else if ((strInput.Find("quit") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if ((strInput.Find("grab") != -1) && CurrentRoom.GetItem() != nullptr)
 			{
 					Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 					CurrentPlayer->AddItem(CurrentRoom.GetItem());
@@ -293,7 +293,7 @@ void GameManager::Update()
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[0];
 			}
-			else if ((strInput.Find("quit") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if ((strInput.Find("grab") != -1) && CurrentRoom.GetItem() != nullptr)
 			{
 				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
@@ -346,7 +346,7 @@ void GameManager::Update()
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if ((strInput.Find("quit") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if ((strInput.Find("grab") != -1) && CurrentRoom.GetItem() != nullptr)
 			{
 				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
