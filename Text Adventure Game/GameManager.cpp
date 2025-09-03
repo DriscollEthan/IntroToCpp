@@ -113,22 +113,22 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("left") != -1)
+			else if (strInput == "left")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[3];
 			}
-			else if (strInput.Find("up") != -1)
+			else if (strInput == "up")
 			{
 				Print("You move to the room on the top.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if (strInput.Find("right") != -1)
+			else if (strInput == "right")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[4];
 			}
-			else if (strInput.Find("inventory") != -1)
+			else if (strInput.Find("inv") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -166,27 +166,27 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("left") != -1)
+			else if (strInput == "left")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[5];
 			}
-			else if (strInput.Find("up") != -1)
+			else if (strInput == "up")
 			{
 				Print("You move to the room on the top.");
 				CurrentRoom = AllRooms[2];
 			}
-			else if (strInput.Find("right") != -1)
+			else if (strInput == "right")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[6];
 			}
-			else if (strInput.Find("down") != -1)
+			else if (strInput == "down")
 			{
 				Print("You move to the room on the bottom.");
 				CurrentRoom = AllRooms[0];
 			}
-			else if (strInput.Find("inventory") != -1)
+			else if (strInput.Find("inv") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -235,7 +235,7 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("right") != -1)
+			else if (strInput == "right")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[0];
@@ -246,7 +246,7 @@ void GameManager::Update()
 					CurrentPlayer->AddItem(CurrentRoom.GetItem());
 					CurrentRoom.SetItemTaken(true);
 			}
-			else if (strInput.Find("inventory") != -1)
+			else if (strInput.Find("inv") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -288,7 +288,7 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("left") != -1)
+			else if (strInput == "left")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[0];
@@ -299,7 +299,7 @@ void GameManager::Update()
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
 				CurrentRoom.SetItemTaken(true);
 			}
-			else if (strInput.Find("inventory") != -1)
+			else if (strInput.Find("inv") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -341,7 +341,7 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("right") != -1)
+			else if (strInput == "right")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[1];
@@ -352,7 +352,7 @@ void GameManager::Update()
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
 				CurrentRoom.SetItemTaken(true);
 			}
-			else if (strInput.Find("inventory") != -1)
+			else if (strInput.Find("inv") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -394,7 +394,7 @@ void GameManager::Update()
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput.Find("left") != -1)
+			else if (strInput == "left")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[1];
@@ -414,7 +414,7 @@ void GameManager::Update()
 				Print("You learned the Curse Spell.");
 				CurrentPlayer->LearnSpell(Curse());
 			}
-			else if (strInput.Find("inventory") != -1)
+			else if (strInput.Find("inv") != -1)
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
