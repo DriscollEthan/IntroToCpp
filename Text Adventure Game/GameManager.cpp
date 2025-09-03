@@ -108,27 +108,27 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1)
+			if (strInput.Find("quit") != -1 || strInput == "5")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput == "left")
+			else if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[3];
 			}
-			else if (strInput == "up")
+			else if (strInput == "up" || strInput == "2")
 			{
 				Print("You move to the room on the top.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if (strInput == "right")
+			else if (strInput == "right" || strInput == "3")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[4];
 			}
-			else if (strInput.Find("inv") != -1)
+			else if (strInput.Find("inv") != -1 || strInput == "4")
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -161,32 +161,32 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1)
+			if (strInput.Find("quit") != -1 || strInput == "6")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput == "left")
+			else if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[5];
 			}
-			else if (strInput == "up")
+			else if (strInput == "up" || strInput == "2")
 			{
 				Print("You move to the room on the top.");
 				CurrentRoom = AllRooms[2];
 			}
-			else if (strInput == "right")
+			else if (strInput == "right" || strInput == "3")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[6];
 			}
-			else if (strInput == "down")
+			else if (strInput == "down" || strInput == "4")
 			{
 				Print("You move to the room on the bottom.");
 				CurrentRoom = AllRooms[0];
 			}
-			else if (strInput.Find("inv") != -1)
+			else if (strInput.Find("inv") != -1 || strInput == "5")
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -230,23 +230,23 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1)
+			if (strInput.Find("quit") != -1 || strInput == "3")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput == "right")
+			else if (strInput == "right" || strInput == "1")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[0];
 			}
-			else if ((strInput.Find("grab") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if ((strInput.Find("grab") != -1 || strInput == "0") && CurrentRoom.GetItem() != nullptr)
 			{
 					Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 					CurrentPlayer->AddItem(CurrentRoom.GetItem());
 					CurrentRoom.SetItemTaken(true);
 			}
-			else if (strInput.Find("inv") != -1)
+			else if (strInput.Find("inv") != -1 || strInput == "2")
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -283,23 +283,23 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1)
+			if (strInput.Find("quit") != -1 || strInput == "3")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput == "left")
+			else if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[0];
 			}
-			else if ((strInput.Find("grab") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if ((strInput.Find("grab") != -1 || strInput == "0") && CurrentRoom.GetItem() != nullptr)
 			{
 				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
 				CurrentRoom.SetItemTaken(true);
 			}
-			else if (strInput.Find("inv") != -1)
+			else if (strInput.Find("inv") != -1 || strInput == "2")
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -328,31 +328,31 @@ void GameManager::Update()
 				Print("This room has a lot of locked lockers on the outskirts of the room. \n In the middle of the room you find an open locker with a shield inside.");
 				Print("You may grab the item by typing, \n 0. Grab");
 			}
-			Print("To switch rooms by typing: \n 3. Right");
-			Print("You may also check your inventory by typing: \n 5. Inventory");
-			Print("You may quit by typing: \n 6. Quit");
+			Print("To switch rooms by typing: \n 1. Right");
+			Print("You may also check your inventory by typing: \n 2. Inventory");
+			Print("You may quit by typing: \n 3. Quit");
 			Print(" \n ");
 			std::cin >> input;
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1)
+			if (strInput.Find("quit") != -1 || strInput == "3")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput == "right")
+			else if (strInput == "right" || strInput == "1")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if ((strInput.Find("grab") != -1) && CurrentRoom.GetItem() != nullptr)
+			else if ((strInput.Find("grab") != -1 || strInput == "0") && CurrentRoom.GetItem() != nullptr)
 			{
 				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
 				CurrentPlayer->AddItem(CurrentRoom.GetItem());
 				CurrentRoom.SetItemTaken(true);
 			}
-			else if (strInput.Find("inv") != -1)
+			else if (strInput.Find("inv") != -1 || strInput == "2")
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
@@ -389,32 +389,32 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1)
+			if (strInput.Find("quit") != -1 || strInput == "6")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
-			else if (strInput == "left")
+			else if (strInput == "left" || strInput == "4")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if (strInput.Find("lightning") != -1)
+			else if (strInput.Find("lightning") != -1 || strInput == "1")
 			{
 				Print("You learned the Lightning Spell.");
 				CurrentPlayer->LearnSpell(Lighting());
 			}
-			else if (strInput.Find("poison") != -1)
+			else if (strInput.Find("poison") != -1 || strInput == "2")
 			{
 				Print("You learned the Poison Spell.");
 				CurrentPlayer->LearnSpell(Poison());
 			}
-			else if (strInput.Find("curse") != -1)
+			else if (strInput.Find("curse") != -1 || strInput == "3")
 			{
 				Print("You learned the Curse Spell.");
 				CurrentPlayer->LearnSpell(Curse());
 			}
-			else if (strInput.Find("inv") != -1)
+			else if (strInput.Find("inv") != -1 || strInput == "5")
 			{
 				Item* inventory = CurrentPlayer->GetInventory();
 				if (inventory[0].GetItemType() == NONE)
