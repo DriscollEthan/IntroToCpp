@@ -379,7 +379,7 @@ void GameManager::Update()
 			if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == NONE)
 			{
 				Print("This room has a big altar in the middle, with a spellbook on the reading stand. \n You walk upto the spellbook and on the first page you figure out how you can learn a new spell.");
-				Print("You may learn a new spell by typing, \n 1. Lighting \n 2. Poison \n 3. Curse");
+				Print("You may learn a new spell by typing, \n 1. Lightning \n 2. Poison \n 3. Curse");
 			}
 			Print("To switch rooms by typing: \n 4. Left");
 			Print("You may also check your inventory by typing: \n 5. Inventory");
@@ -399,9 +399,9 @@ void GameManager::Update()
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if (strInput.Find("lighting") != -1)
+			else if (strInput.Find("lightning") != -1)
 			{
-				Print("You learned the Lighting Spell.");
+				Print("You learned the Lightning Spell.");
 				CurrentPlayer->LearnSpell(Lighting());
 			}
 			else if (strInput.Find("poison") != -1)
