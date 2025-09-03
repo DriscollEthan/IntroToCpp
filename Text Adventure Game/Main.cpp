@@ -3,8 +3,8 @@
 
 int main()
 {
-	bool bKeepPlaying = true;
 	GameManager* Game = new GameManager();
+	bool bKeepPlaying = Game->bIsKeepPlaying;
 
 	Game->BeginPlay();
 

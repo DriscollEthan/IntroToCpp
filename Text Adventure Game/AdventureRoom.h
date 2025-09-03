@@ -27,6 +27,8 @@ protected:
 
 	bool bIsSpellRoom = false;
 
+	int RoomID;
+
 public:
 	//Functions
 	Item* GetItem();
@@ -38,6 +40,10 @@ public:
 	Driscoll_String GetItemDescription();
 
 	bool IsSpellRoom();
+
+	int GetRoomID();
+
+	void SetRoomID(int _newID);
 };
 
 

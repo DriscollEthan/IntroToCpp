@@ -1,4 +1,6 @@
 #include "Driscoll_String.h"
+#include "Driscoll_String.h"
+#include "Driscoll_String.h"
 
 /* CONSTRUCTORS */
 

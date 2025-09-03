@@ -57,3 +57,13 @@ bool AdventureRoom::IsSpellRoom()
 {
 	return bIsSpellRoom;
 }
+
+int AdventureRoom::GetRoomID()
+{
+	return RoomID;
+}
+
+void AdventureRoom::SetRoomID(int _newID)
+{
+	RoomID = _newID;
+}

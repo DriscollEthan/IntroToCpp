@@ -52,13 +52,13 @@ void Player::UseItem(Item* _itemToUse)
 {
 	switch (_itemToUse->GetItemType())
 	{
-	case HealthPotion:
+	case E_HealthPotion:
 		Health += 50.0f;
 		break;
-	case DamagePotion:
+	case E_DamagePotion:
 		DamageMultiplier = 1.5f;
 		break;
-	case Shield:
+	case E_Shield:
 		bIsHitable = false;
 		break;
 	}

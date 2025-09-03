@@ -10,12 +10,14 @@ public:
 
 	~GameManager();
 
+	bool bIsKeepPlaying;
 private:
 	AdventureRoom CurrentRoom;
 	AdventureRoom* AllRooms;
 	size_t ALLROOMS_LENGTH;
 	Player* CurrentPlayer;
 	Enemy* CurrentEnemy;
+	bool bIsExploring;
 
 public:
 	//FUNCTIONS
