@@ -4,6 +4,6 @@
 
 class HealthPotion : public Item
 {
-
+	HealthPotion();
 };
 

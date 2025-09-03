@@ -4,9 +4,9 @@
 enum ItemType
 {
 	None,
-	HealthPotion,
-	DamagePotion,
-	Shield
+	E_HealthPotion,
+	E_DamagePotion,
+	E_Shield
 };
 
 class Item

@@ -51,8 +51,26 @@
     <ClCompile Include="..\String_Ultility_Class\Driscoll_String.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DamagePotion.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
     <ClCompile Include="HealthPotion.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Shield.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Fireball.cpp">
+      <Filter>Source Files\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="Lighting.cpp">
+      <Filter>Source Files\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="Poison.cpp">
+      <Filter>Source Files\Spells</Filter>
+    </ClCompile>
+    <ClCompile Include="Curse.cpp">
+      <Filter>Source Files\Spells</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,8 +100,26 @@
     <ClInclude Include="Driscoll_String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DamagePotion.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
     <ClInclude Include="HealthPotion.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Shield.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireball.h">
+      <Filter>Header Files\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting.h">
+      <Filter>Header Files\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="Poison.h">
+      <Filter>Header Files\Spells</Filter>
+    </ClInclude>
+    <ClInclude Include="Curse.h">
+      <Filter>Header Files\Spells</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

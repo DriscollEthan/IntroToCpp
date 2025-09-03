@@ -129,26 +129,38 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\String_Ultility_Class\Driscoll_String.cpp" />
+    <ClCompile Include="Curse.cpp" />
+    <ClCompile Include="DamagePotion.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Lighting.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="AdventureRoom.cpp" />
+    <ClCompile Include="Poison.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Spell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="GDD.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Curse.h" />
+    <ClInclude Include="DamagePotion.h" />
     <ClInclude Include="Driscoll_String.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Fireball.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Lighting.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="AdventureRoom.h" />
+    <ClInclude Include="Poison.h" />
+    <ClInclude Include="Shield.h" />
     <ClInclude Include="Spell.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
