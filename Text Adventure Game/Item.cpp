@@ -2,8 +2,8 @@
 
 Item::Item()
 {
-	ItemName = " ";
-	ItemDescription = " ";
+	ItemName = "NONE";
+	ItemDescription = "NONE";
 	Type = None;
 }
 

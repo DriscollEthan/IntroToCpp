@@ -25,6 +25,5 @@ public:
 	void BeginPlay();
 
 	void Update();
-	
 };
 

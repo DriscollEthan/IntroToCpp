@@ -242,9 +242,9 @@ void GameManager::Update()
 			}
 			else if ((strInput.Find("grab") != -1 || strInput == "0") && CurrentRoom.GetItem() != nullptr)
 			{
-					Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
-					CurrentPlayer->AddItem(CurrentRoom.GetItem());
-					CurrentRoom.SetItemTaken(true);
+				Print(Driscoll_String("You acquired a ") + CurrentRoom.GetItemName());
+				CurrentPlayer->AddItem(CurrentRoom.GetItem());
+				CurrentRoom.SetItemTaken(true);
 			}
 			else if (strInput.Find("inv") != -1 || strInput == "2")
 			{
@@ -374,6 +374,7 @@ void GameManager::Update()
 				Print("Please type a valid Command.");
 			}
 			break;
+
 		case 6:
 			//THE ALTAR
 			if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == NONE)
@@ -444,14 +445,64 @@ void GameManager::Update()
 		//Combat Sequence
 		char input[256];
 		Driscoll_String strInput;
-		std::cin >> input;
-		strInput = input;
-		strInput.ToLower();
 
-		if (strInput.Find("quit") != -1)
+		while (CurrentEnemy->GetHealth() > 0.0f && CurrentPlayer->GetHealth() > 0.0f)
+
 		{
-			bIsKeepPlaying = false;
+			std::cout << "Your health is: " << CurrentPlayer->GetHealth() << std::endl;
+			Print(" ");
+			std::cout << "The Witch's health is: " << CurrentEnemy->GetHealth() << std::endl;
+			Print("You can use a Spell to attack, use an item as a consumable, or quit.");
+			std::cout << "0. " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << ' ' << CurrentPlayer->GetSpellsLeanred()[0].GetSpellDescription() << std::endl;
+			if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE)
+			{
+				std::cout << "1. " << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << ' ' << CurrentPlayer->GetSpellsLeanred()[1].GetSpellDescription() << std::endl;
+			}
+			if (CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
+			{
+				std::cout << "2. " << CurrentPlayer->GetInventory()[0].GetItemName() << ' ' << CurrentPlayer->GetInventory()[0].GetItemDescription() << std::endl;
+			}
+			if (CurrentPlayer->GetInventory()[1].GetItemType() != NONE)
+			{
+				std::cout << "3. " << CurrentPlayer->GetInventory()[1].GetItemName() << ' ' << CurrentPlayer->GetInventory()[1].GetItemDescription() << std::endl;
+			}
+			if (CurrentPlayer->GetInventory()[2].GetItemType() != NONE)
+			{
+				std::cout << "4. " << CurrentPlayer->GetInventory()[2].GetItemName() << ' ' << CurrentPlayer->GetInventory()[2].GetItemDescription() << std::endl;
+			}
+			Print("5. Quit");
+
+			//GET INPUT AND CHECK INPUT
+			std::cin >> input;
+			strInput = input;
+			strInput.ToLower();
+
+			if (strInput == "fireball" || strInput == "0")
+			{
+
+			}
+			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE)
+			{
+
+			}
+			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "2") && CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
+			{
+
+			}
+			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "3") && CurrentPlayer->GetInventory()[1].GetItemType() != NONE)
+			{
+
+			}
+			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "4") && CurrentPlayer->GetInventory()[2].GetItemType() != NONE)
+			{
+
+			}
+			if (strInput == "quit" || strInput == "5")
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
 		}
+
 	}
 }
-
