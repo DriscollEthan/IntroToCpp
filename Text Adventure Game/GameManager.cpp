@@ -140,7 +140,7 @@ void GameManager::Update()
 					}
 				}
 			}
-			else if (strInput.Find("quit") != -1 || strInput == "5")
+			else if (strInput == "quit" || strInput == "5")
 			{
 				bIsKeepPlaying = false;
 				break;
@@ -198,7 +198,7 @@ void GameManager::Update()
 					}
 				}
 			}
-			else if (strInput.Find("quit") != -1 || strInput == "6")
+			else if (strInput == "quit" || strInput == "6")
 			{
 				bIsKeepPlaying = false;
 				break;
@@ -259,7 +259,7 @@ void GameManager::Update()
 					}
 				}
 			}
-			else if (strInput.Find("quit") != -1 || strInput == "3")
+			else if (strInput == "quit" || strInput == "3")
 			{
 				bIsKeepPlaying = false;
 				break;
@@ -313,7 +313,7 @@ void GameManager::Update()
 					}
 				}
 			}
-			else if (strInput.Find("quit") != -1 || strInput == "3")
+			else if (strInput == "quit" || strInput == "3")
 			{
 				bIsKeepPlaying = false;
 				break;
@@ -367,7 +367,7 @@ void GameManager::Update()
 					}
 				}
 			}
-			else if (strInput.Find("quit") != -1 || strInput == "3")
+			else if (strInput == "quit" || strInput == "3")
 			{
 				bIsKeepPlaying = false;
 				break;
@@ -430,7 +430,7 @@ void GameManager::Update()
 					}
 				}
 			}
-			else if (strInput.Find("quit") != -1 || strInput == "6")
+			else if (strInput == "quit" || strInput == "6")
 			{
 				bIsKeepPlaying = false;
 				break;
