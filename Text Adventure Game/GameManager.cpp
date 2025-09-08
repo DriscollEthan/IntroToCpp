@@ -472,6 +472,9 @@ void GameManager::Update()
 			}
 			Print("5. Quit");
 
+			CurrentPlayer->SpellCooldownRoundTimer -= 1;
+			CurrentPlayer->bIsLingeringEffect = (CurrentPlayer->SpellCooldownRoundTimer - 1 <= 0);
+
 			//GET INPUT AND CHECK INPUT
 			std::cin >> input;
 			strInput = input;
@@ -483,10 +486,12 @@ void GameManager::Update()
 				CurrentEnemy->TakeDamage(damage);
 				std::cout << "You casted a: " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << std::endl;
 			}
-			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE)
+			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE) && (CurrentPlayer->SpellCooldownRoundTimer <=0))
 			{
 				float damage = CurrentPlayer->Attack(&(CurrentPlayer->GetSpellsLeanred()[1]));
 				CurrentEnemy->TakeDamage(damage);
+				CurrentPlayer->SpellCooldownRoundTimer = 3;
+				CurrentPlayer->bIsLingeringEffect = true;
 				std::cout << "You casted a: " << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetInventory()[0].GetItemName().ToLower() || strInput == "2") && CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
@@ -514,12 +519,38 @@ void GameManager::Update()
 				Print("Please type a valid Command.");
 			}
 
+			//POISON DAMAGE
+			if (CurrentPlayer->bIsLingeringEffect && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Poison)
+			{
+				CurrentEnemy->TakeDamage(15.0f);
+			}
 			//Enemy Death Check
 			if (CurrentEnemy->GetHealth() <= 0.0f) { break; }
 
 			//Enemy Attack
-			CurrentPlayer->TakeDamage(CurrentEnemy->GetDamage());
+			if (CurrentPlayer->bIsLingeringEffect && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Lighting)
+			{
+				CurrentPlayer->bIsLingeringEffect = false;
+				break;
+			}
+
+			//CURSE CHECK TO LOWER DAMAGE
+			if (CurrentPlayer->bIsLingeringEffect && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Curse)
+			{
+				CurrentPlayer->TakeDamage((CurrentEnemy->GetDamage()) / 2);
+			}
+			else { CurrentPlayer->TakeDamage(CurrentEnemy->GetDamage()); }
 		}
 
+		if (CurrentEnemy->GetHealth() <= 0.0f)
+		{
+			Print("You killed the witch. \nCongratulations on defeating this dungeon. \nYou should try this again with some different spells.");
+			bIsKeepPlaying = false;
+		}
+		else if (CurrentPlayer->GetHealth() <= 0.0f)
+		{
+			Print("You have died to the witch. \nYou should try gathering more items and spells to defeat the witch.");
+			bIsKeepPlaying = false;
+		}
 	}
 }

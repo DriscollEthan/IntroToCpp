@@ -40,12 +40,22 @@ float Player::GetMana()
 
 float Player::Attack(Spell* _spellUsed)
 {
-	return _spellUsed->GetDamage();
+	float damage = _spellUsed->GetDamage() * DamageMultiplier;
+	DamageMultiplier = 1.0f;
+	return damage;
 }
 
 void Player::TakeDamage(float _damage)
 {
-	Health -= _damage;
+	if (bIsHitable)
+	{
+		Health -= _damage;
+		return;
+	}
+	else
+	{
+		bIsHitable = true;
+	}
 }
 
 void Player::UseItem(Item* _itemToUse)

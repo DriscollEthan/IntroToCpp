@@ -40,5 +40,9 @@ public:
 	void AddItem(Item* _itemToAdd);
 
 	void LearnSpell(Spell _spellToLearn);
+
+	int SpellCooldownRoundTimer = 0;
+
+	bool bIsLingeringEffect = false;
 };
 

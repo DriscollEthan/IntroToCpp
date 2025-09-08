@@ -4,6 +4,7 @@ Enemy::Enemy()
 {
 	Health = 100.0f;
 	bIsStunned = false;
+	Damage = 30.0f;
 }
 
 Enemy::Enemy(float _health)
