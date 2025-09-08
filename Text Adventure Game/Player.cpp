@@ -38,7 +38,7 @@ float Player::GetMana()
 	return Mana;
 }
 
-void Player::Attack(Spell* _spellUsed)
+float Player::Attack(Spell* _spellUsed)
 {
 
 }
@@ -63,6 +63,14 @@ void Player::UseItem(Item* _itemToUse)
 		break;
 	}
 
+	for (int i = 0; ItemsCollected[i].GetItemType() != NONE; ++i)
+	{
+		if (ItemsCollected[i].GetItemType() == _itemToUse->GetItemType())
+		{
+			ItemsCollected[i].~Item();
+			ItemsCollected[i] = Item();
+		}
+	}
 }
 
 Item* Player::GetInventory()

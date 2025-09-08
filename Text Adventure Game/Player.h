@@ -27,7 +27,7 @@ public:
 
 	float GetMana();
 
-	void Attack(Spell* _spellUsed);
+	float Attack(Spell* _spellUsed);
 
 	void TakeDamage(float _damage);
 

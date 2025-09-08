@@ -479,29 +479,46 @@ void GameManager::Update()
 
 			if (strInput == "fireball" || strInput == "0")
 			{
-
+				float damage = CurrentPlayer->Attack(&(CurrentPlayer->GetSpellsLeanred()[0]));
+				CurrentEnemy->TakeDamage(damage);
+				std::cout << "You casted a: " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE)
 			{
-
+				float damage = CurrentPlayer->Attack(&(CurrentPlayer->GetSpellsLeanred()[1]));
+				CurrentEnemy->TakeDamage(damage);
+				std::cout << "You casted a: " << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << std::endl;
 			}
-			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "2") && CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
+			else if ((strInput == CurrentPlayer->GetInventory()[0].GetItemName().ToLower() || strInput == "2") && CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
 			{
-
+				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[0]));
+				std::cout << "You used a: " << CurrentPlayer->GetInventory()[0].GetItemName() << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "3") && CurrentPlayer->GetInventory()[1].GetItemType() != NONE)
 			{
-
+				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[1]));
+				std::cout << "You used a: " << CurrentPlayer->GetInventory()[1].GetItemName() << std::endl;
 			}
-			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "4") && CurrentPlayer->GetInventory()[2].GetItemType() != NONE)
+			else if ((strInput == CurrentPlayer->GetInventory()[2].GetItemName().ToLower() || strInput == "4") && CurrentPlayer->GetInventory()[2].GetItemType() != NONE)
 			{
-
+				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[2]));
+				std::cout << "You used a: " << CurrentPlayer->GetInventory()[2].GetItemName() << std::endl;
 			}
-			if (strInput == "quit" || strInput == "5")
+			else if (strInput == "quit" || strInput == "5")
 			{
 				bIsKeepPlaying = false;
 				break;
 			}
+			else
+			{
+				Print("Please type a valid Command.");
+			}
+
+			//Enemy Death Check
+			if (CurrentEnemy->GetHealth() <= 0.0f) { break; }
+
+			//Enemy Attack
+			CurrentPlayer->TakeDamage(CurrentEnemy->GetDamage());
 		}
 
 	}
