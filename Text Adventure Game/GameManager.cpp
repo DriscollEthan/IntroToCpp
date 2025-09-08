@@ -438,7 +438,7 @@ void GameManager::Update()
 			}
 			break;
 		}
-		Print("======================================================================================================");
+		Print("====================================================================================================== \n");
 	}
 	else
 	{
@@ -449,14 +449,19 @@ void GameManager::Update()
 		while (CurrentEnemy->GetHealth() > 0.0f && CurrentPlayer->GetHealth() > 0.0f)
 
 		{
+			Print("====================================================================================================== \n");
 			std::cout << "Your health is: " << CurrentPlayer->GetHealth() << std::endl;
 			Print(" ");
 			std::cout << "The Witch's health is: " << CurrentEnemy->GetHealth() << std::endl;
 			Print("You can use a Spell to attack, use an item as a consumable, or quit.");
 			std::cout << "0. " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << ' ' << CurrentPlayer->GetSpellsLeanred()[0].GetSpellDescription() << std::endl;
-			if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE)
+			if ((CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE) && (CurrentPlayer->SpellCooldownRoundTimer <= 0))
 			{
 				std::cout << "1. " << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << ' ' << CurrentPlayer->GetSpellsLeanred()[1].GetSpellDescription() << std::endl;
+			}
+			else if (CurrentPlayer->SpellCooldownRoundTimer > 0)
+			{
+				std::cout << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << " is recharging, it has: " << CurrentPlayer->SpellCooldownRoundTimer << " rounds left on the cooldown." << std::endl;
 			}
 			if (CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
 			{
@@ -484,7 +489,8 @@ void GameManager::Update()
 			{
 				float damage = CurrentPlayer->Attack(&(CurrentPlayer->GetSpellsLeanred()[0]));
 				CurrentEnemy->TakeDamage(damage);
-				std::cout << "You casted a: " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << std::endl;
+				std::cout << "You casted: " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << std::endl;
+				std::cout << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE) && (CurrentPlayer->SpellCooldownRoundTimer <=0))
 			{
@@ -492,22 +498,26 @@ void GameManager::Update()
 				CurrentEnemy->TakeDamage(damage);
 				CurrentPlayer->SpellCooldownRoundTimer = 3;
 				CurrentPlayer->bIsLingeringEffect = true;
-				std::cout << "You casted a: " << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << std::endl;
+				std::cout << "You casted: " << CurrentPlayer->GetSpellsLeanred()[1].GetSpellName() << std::endl;
+				std::cout << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetInventory()[0].GetItemName().ToLower() || strInput == "2") && CurrentPlayer->GetInventory()[0].GetItemType() != NONE)
 			{
-				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[0]));
 				std::cout << "You used a: " << CurrentPlayer->GetInventory()[0].GetItemName() << std::endl;
+				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[0]));
+				std::cout << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetInventory()[1].GetItemName().ToLower() || strInput == "3") && CurrentPlayer->GetInventory()[1].GetItemType() != NONE)
 			{
-				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[1]));
 				std::cout << "You used a: " << CurrentPlayer->GetInventory()[1].GetItemName() << std::endl;
+				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[1]));
+				std::cout << std::endl;
 			}
 			else if ((strInput == CurrentPlayer->GetInventory()[2].GetItemName().ToLower() || strInput == "4") && CurrentPlayer->GetInventory()[2].GetItemType() != NONE)
 			{
-				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[2]));
 				std::cout << "You used a: " << CurrentPlayer->GetInventory()[2].GetItemName() << std::endl;
+				CurrentPlayer->UseItem(&(CurrentPlayer->GetInventory()[2]));
+				std::cout << std::endl;
 			}
 			else if (strInput == "quit" || strInput == "5")
 			{
@@ -542,6 +552,7 @@ void GameManager::Update()
 			else { CurrentPlayer->TakeDamage(CurrentEnemy->GetDamage()); }
 		}
 
+		std::cout << std::endl;
 		if (CurrentEnemy->GetHealth() <= 0.0f)
 		{
 			Print("You killed the witch. \nCongratulations on defeating this dungeon. \nYou should try this again with some different spells.");

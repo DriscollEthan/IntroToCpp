@@ -50,11 +50,14 @@ void Player::TakeDamage(float _damage)
 	if (bIsHitable)
 	{
 		Health -= _damage;
+		std::cout << "You got hit by the witch." << std::endl;
+		std::cout << std::endl;
 		return;
 	}
 	else
 	{
 		bIsHitable = true;
+		return;
 	}
 }
 
@@ -66,7 +69,7 @@ void Player::UseItem(Item* _itemToUse)
 		Health += 50.0f;
 		break;
 	case E_DamagePotion:
-		DamageMultiplier = 1.5f;
+		DamageMultiplier = 2.0f;
 		break;
 	case E_Shield:
 		bIsHitable = false;
