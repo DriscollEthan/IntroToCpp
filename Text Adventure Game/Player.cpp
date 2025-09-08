@@ -20,6 +20,10 @@ Player::Player()
 	DamageMultiplier = 1.0f;
 
 	bIsHitable = true;
+
+	SpellCooldownRoundTimer = 0;
+
+	bIsLingeringEffect = false;
 }
 
 Player::~Player()
@@ -84,6 +88,7 @@ void Player::UseItem(Item* _itemToUse)
 			ItemsCollected[i] = Item();
 		}
 	}
+	return;
 }
 
 Item* Player::GetInventory()

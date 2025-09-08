@@ -481,7 +481,7 @@ void GameManager::Update()
 			Print("5. Quit");
 
 			CurrentPlayer->SpellCooldownRoundTimer -= 1;
-			CurrentPlayer->bIsLingeringEffect = (CurrentPlayer->SpellCooldownRoundTimer - 1 <= 0);
+			CurrentPlayer->bIsLingeringEffect = (CurrentPlayer->SpellCooldownRoundTimer - 1 >= 1);
 
 			//GET INPUT AND CHECK INPUT
 			std::cin >> input;
