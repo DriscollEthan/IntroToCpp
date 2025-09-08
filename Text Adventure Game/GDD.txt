@@ -73,7 +73,7 @@ Spells:
 		Stuns Enemy for a turn and does (30) Damage To Enemy -- BUT Takes 2 Turn to Recharge.
 
 	Poison:
-		Does (10) Base Damage to an Enemy and (15) Damage over the next 2 Turns -- BUT Takes 3 Turns to Recharge.
+		Does (5) Base Damage to an Enemy and (15) Damage over the next 2 Turns -- BUT Takes 3 Turns to Recharge.
 
 	Curse:
 		Does (15) Base Damage to an Enemy and Cuts the Enemy Damage by (90%) for the next 2 Turns --  BUT Takes 3 Turns to Recharge.
