@@ -70,7 +70,7 @@ void Player::UseItem(Item* _itemToUse)
 	switch (_itemToUse->GetItemType())
 	{
 	case E_HealthPotion:
-		Health += 60.0f;
+		Health += 55.0f;
 		break;
 	case E_DamagePotion:
 		DamageMultiplier = 2.0f;

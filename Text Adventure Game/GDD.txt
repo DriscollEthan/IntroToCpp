@@ -56,10 +56,10 @@ Rooms:
 
 Items:
 	Health Potion:
-		Giveback 60% Health for one turn.
+		Giveback (55%) Health for one turn.
 
 	Damage Potion:
-		Extra 50% Damage for one turn.
+		Extra (50%) Damage for one turn.
 
 	Shield:
 		Block 1 hit for one turn, but deal zero damage.
