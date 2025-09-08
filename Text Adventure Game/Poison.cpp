@@ -3,7 +3,7 @@
 Poison::Poison()
 {
 	SpellName = "Poison";
-	SpellDescription = "Poison is a spell that does some damage, and will deal damage to an enemy over time.";
+	SpellDescription = " - Poison is a spell that does some damage, and will deal damage to an enemy over time.";
 	Type = E_Poison;
 	Damage = 5.0f;
 	DamageOverTime = 17.5f;

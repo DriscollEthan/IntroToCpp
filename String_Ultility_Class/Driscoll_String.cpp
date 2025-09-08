@@ -303,7 +303,7 @@ Driscoll_String Driscoll_String::ToLower() const
 		}
 	}
 
-	return Driscoll_String();
+	return *this;
 }
 
 Driscoll_String Driscoll_String::ToUpper() const
