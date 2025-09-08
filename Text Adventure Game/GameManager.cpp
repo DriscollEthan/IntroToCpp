@@ -541,9 +541,8 @@ void GameManager::Update()
 			if (CurrentEnemy->GetHealth() <= 0.0f) { break; }
 
 			//Enemy Attack
-			if (CurrentPlayer->bIsLingeringEffect && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Lighting)
+			if (CurrentPlayer->SpellCooldownRoundTimer == 3 && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Lighting)
 			{
-				CurrentPlayer->bIsLingeringEffect = false;
 				break;
 			}
 
