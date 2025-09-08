@@ -56,7 +56,7 @@ Rooms:
 
 Items:
 	Health Potion:
-		Giveback 50% Health for one turn.
+		Giveback 60% Health for one turn.
 
 	Damage Potion:
 		Extra 50% Damage for one turn.
@@ -67,7 +67,7 @@ Items:
 Spells:
 () = Subject To Be Changed for Balancing Purposes
 	Fireball:
-		Base Spell that does (20) Damage To Enemy.
+		Base Spell that does (22.5) Damage To Enemy.
 
 	Lighting:
 		Stuns Enemy for a turn and does (30) Damage To Enemy -- BUT Takes 2 Turn to Recharge.
@@ -76,4 +76,4 @@ Spells:
 		Does (10) Base Damage to an Enemy and (15) Damage over the next 2 Turns -- BUT Takes 3 Turns to Recharge.
 
 	Curse:
-		Does (15) Base Damage to an Enemy and Cuts the Enemy Damage by (50%) for the next 2 Turns --  BUT Takes 3 Turns to Recharge.
+		Does (15) Base Damage to an Enemy and Cuts the Enemy Damage by (90%) for the next 2 Turns --  BUT Takes 3 Turns to Recharge.

@@ -488,6 +488,8 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
+			std::cout << std::endl;
+
 			if (strInput == "fireball" || strInput == "0")
 			{
 				float damage = CurrentPlayer->Attack(&(CurrentPlayer->GetSpellsLeanred()[0]));
@@ -549,7 +551,11 @@ void GameManager::Update()
 			//CURSE CHECK TO LOWER DAMAGE
 			if (CurrentPlayer->bIsLingeringEffect && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Curse)
 			{
-				CurrentPlayer->TakeDamage((CurrentEnemy->GetDamage()) / 2);
+				float damage = CurrentEnemy->GetDamage();
+				damage /= 100;
+				//The 2nd float in the subtraction problem = the % of damage reduction.
+				damage *= (100 - 90);
+				CurrentPlayer->TakeDamage(damage);
 			}
 			else { CurrentPlayer->TakeDamage(CurrentEnemy->GetDamage()); }
 		}

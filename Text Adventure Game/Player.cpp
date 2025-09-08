@@ -70,7 +70,7 @@ void Player::UseItem(Item* _itemToUse)
 	switch (_itemToUse->GetItemType())
 	{
 	case E_HealthPotion:
-		Health += 50.0f;
+		Health += 60.0f;
 		break;
 	case E_DamagePotion:
 		DamageMultiplier = 2.0f;
@@ -80,7 +80,7 @@ void Player::UseItem(Item* _itemToUse)
 		break;
 	}
 
-	for (int i = 0; ItemsCollected[i].GetItemType() != NONE; ++i)
+	for (int i = 0; i < 3; ++i)
 	{
 		if (ItemsCollected[i].GetItemType() == _itemToUse->GetItemType())
 		{
