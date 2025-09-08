@@ -3,17 +3,30 @@
 
 int main()
 {
-	GameManager* Game = new GameManager();
-	bool bKeepPlaying = Game->bIsKeepPlaying;
+	bool bOverlordPlaying = true;
 
-	Game->BeginPlay();
+	//while (bOverlordPlaying)
+	//{
 
-	while (bKeepPlaying)
-	{
-		//BEGIN
-		Game->Update();
-		bKeepPlaying = Game->bIsKeepPlaying;
-	}
+		GameManager* Game = new GameManager();
+		bool bKeepPlaying = Game->bIsKeepPlaying;
 
-	delete Game;
+		Game->BeginPlay();
+
+		while (bKeepPlaying)
+		{
+			//BEGIN
+			Game->Update();
+			bKeepPlaying = Game->bIsKeepPlaying;
+		}
+
+		delete Game;
+
+		//char input[256];
+		//Driscoll_String strInput;
+		//std::cin >> input;
+		//strInput = input;
+		//strInput.ToLower();
+
+	//}
 }
