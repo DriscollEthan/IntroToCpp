@@ -132,7 +132,7 @@ void GameManager::Update()
 				}
 				else
 				{
-					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					for (int i = 0; inventory[i].GetItemType() != NONE && i < 3; ++i)
 					{
 						Print(inventory[i].GetItemName());
 						Print(inventory[i].GetItemDescription());
@@ -190,7 +190,7 @@ void GameManager::Update()
 				}
 				else
 				{
-					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					for (int i = 0; inventory[i].GetItemType() != NONE && i < 3; ++i)
 					{
 						Print(inventory[i].GetItemName());
 						Print(inventory[i].GetItemDescription());
@@ -251,7 +251,7 @@ void GameManager::Update()
 				}
 				else
 				{
-					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					for (int i = 0; inventory[i].GetItemType() != NONE && i < 3; ++i)
 					{
 						Print(inventory[i].GetItemName());
 						Print(inventory[i].GetItemDescription());
@@ -305,7 +305,7 @@ void GameManager::Update()
 				}
 				else
 				{
-					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					for (int i = 0; inventory[i].GetItemType() != NONE && i < 3; ++i)
 					{
 						Print(inventory[i].GetItemName());
 						Print(inventory[i].GetItemDescription());
@@ -359,7 +359,7 @@ void GameManager::Update()
 				}
 				else
 				{
-					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					for (int i = 0; inventory[i].GetItemType() != NONE && i < 3; ++i)
 					{
 						Print(inventory[i].GetItemName());
 						Print(inventory[i].GetItemDescription());
@@ -422,7 +422,7 @@ void GameManager::Update()
 				}
 				else
 				{
-					for (int i = 0; inventory[i].GetItemType() != NONE; ++i)
+					for (int i = 0; inventory[i].GetItemType() != NONE && i < 3; ++i)
 					{
 						Print(inventory[i].GetItemName());
 						Print(inventory[i].GetItemDescription());
