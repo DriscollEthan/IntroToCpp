@@ -161,7 +161,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-		  if (strInput == "left" || strInput == "1")
+			if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[5];
@@ -495,7 +495,7 @@ void GameManager::Update()
 				std::cout << "You casted: " << CurrentPlayer->GetSpellsLeanred()[0].GetSpellName() << std::endl;
 				std::cout << std::endl;
 			}
-			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE) && (CurrentPlayer->SpellCooldownRoundTimer <=0))
+			else if ((strInput == CurrentPlayer->GetSpellsLeanred()[1].GetSpellName().ToLower() || strInput == "1") && (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() != NONE) && (CurrentPlayer->SpellCooldownRoundTimer <= 0))
 			{
 				float damage = CurrentPlayer->Attack(&(CurrentPlayer->GetSpellsLeanred()[1]));
 				CurrentEnemy->TakeDamage(damage);
@@ -535,7 +535,7 @@ void GameManager::Update()
 			//POISON DAMAGE
 			if (CurrentPlayer->bIsLingeringEffect && CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == E_Poison)
 			{
-				CurrentEnemy->TakeDamage(15.0f);
+				CurrentEnemy->TakeDamage(CurrentPlayer->GetSpellsLeanred()[1].GetDamageOverTime());
 			}
 			//Enemy Death Check
 			if (CurrentEnemy->GetHealth() <= 0.0f) { break; }
@@ -567,4 +567,5 @@ void GameManager::Update()
 			bIsKeepPlaying = false;
 		}
 	}
+}
 }

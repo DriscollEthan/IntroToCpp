@@ -67,7 +67,7 @@ Items:
 Spells:
 () = Subject To Be Changed for Balancing Purposes
 	Fireball:
-		Base Spell that does (25) Damage To Enemy.
+		Base Spell that does (20) Damage To Enemy.
 
 	Lighting:
 		Stuns Enemy for a turn and does (40) Damage To Enemy -- BUT Takes 2 Turn to Recharge.
