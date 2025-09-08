@@ -568,4 +568,3 @@ void GameManager::Update()
 		}
 	}
 }
-}

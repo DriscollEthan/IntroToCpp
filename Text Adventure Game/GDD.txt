@@ -70,7 +70,7 @@ Spells:
 		Base Spell that does (20) Damage To Enemy.
 
 	Lighting:
-		Stuns Enemy for a turn and does (40) Damage To Enemy -- BUT Takes 2 Turn to Recharge.
+		Stuns Enemy for a turn and does (30) Damage To Enemy -- BUT Takes 2 Turn to Recharge.
 
 	Poison:
 		Does (10) Base Damage to an Enemy and (15) Damage over the next 2 Turns -- BUT Takes 3 Turns to Recharge.
