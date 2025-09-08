@@ -398,17 +398,17 @@ void GameManager::Update()
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[1];
 			}
-			else if (strInput.Find("lightning") != -1 || strInput == "1")
+			else if ((CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == NONE) && (strInput.Find("lightning") != -1 || strInput == "1"))
 			{
 				Print("You learned the Lightning Spell.");
 				CurrentPlayer->LearnSpell(Lighting());
 			}
-			else if (strInput.Find("poison") != -1 || strInput == "2")
+			else if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == NONE && (strInput.Find("poison") != -1 || strInput == "2"))
 			{
 				Print("You learned the Poison Spell.");
 				CurrentPlayer->LearnSpell(Poison());
 			}
-			else if (strInput.Find("curse") != -1 || strInput == "3")
+			else if (CurrentPlayer->GetSpellsLeanred()[1].GetSpellType() == NONE && (strInput.Find("curse") != -1 || strInput == "3"))
 			{
 				Print("You learned the Curse Spell.");
 				CurrentPlayer->LearnSpell(Curse());
@@ -554,7 +554,7 @@ void GameManager::Update()
 				float damage = CurrentEnemy->GetDamage();
 				damage /= 100;
 				//The 2nd float in the subtraction problem = the % of damage reduction.
-				damage *= (100 - 90);
+				damage *= (100 - 65);
 				CurrentPlayer->TakeDamage(damage);
 			}
 			else { CurrentPlayer->TakeDamage(CurrentEnemy->GetDamage()); }
