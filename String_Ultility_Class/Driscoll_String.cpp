@@ -172,7 +172,7 @@ bool Driscoll_String::Equals(const Driscoll_String& _otherString) const
 		return false;
 	}
 	
-	for (int i = 0; i < GetLength() - 1; ++i)
+	for (int i = 0; i < GetLength(); ++i)
 	{
 		//The moment that the characters are not the same, the Strings must NOT be Equal to Each Other.
 		if (CharacterAt(i) != _otherString.CharacterAt(i))

@@ -40,7 +40,7 @@ float Player::GetMana()
 
 float Player::Attack(Spell* _spellUsed)
 {
-
+	return _spellUsed->GetDamage();
 }
 
 void Player::TakeDamage(float _damage)

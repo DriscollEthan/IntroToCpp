@@ -108,12 +108,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1 || strInput == "5")
-			{
-				bIsKeepPlaying = false;
-				break;
-			}
-			else if (strInput == "left" || strInput == "1")
+			if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[3];
@@ -145,6 +140,11 @@ void GameManager::Update()
 					}
 				}
 			}
+			else if (strInput.Find("quit") != -1 || strInput == "5")
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
 			else
 			{
 				Print("Please type a valid Command.");
@@ -161,12 +161,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1 || strInput == "6")
-			{
-				bIsKeepPlaying = false;
-				break;
-			}
-			else if (strInput == "left" || strInput == "1")
+		  if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[5];
@@ -203,6 +198,11 @@ void GameManager::Update()
 					}
 				}
 			}
+			else if (strInput.Find("quit") != -1 || strInput == "6")
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
 			else
 			{
 				Print("Please type a valid Command.");
@@ -230,12 +230,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1 || strInput == "3")
-			{
-				bIsKeepPlaying = false;
-				break;
-			}
-			else if (strInput == "right" || strInput == "1")
+			if (strInput == "right" || strInput == "1")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[0];
@@ -263,6 +258,11 @@ void GameManager::Update()
 					}
 				}
 			}
+			else if (strInput.Find("quit") != -1 || strInput == "3")
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
 			else
 			{
 				Print("Please type a valid Command.");
@@ -283,12 +283,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1 || strInput == "3")
-			{
-				bIsKeepPlaying = false;
-				break;
-			}
-			else if (strInput == "left" || strInput == "1")
+			if (strInput == "left" || strInput == "1")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[0];
@@ -316,6 +311,11 @@ void GameManager::Update()
 					}
 				}
 			}
+			else if (strInput.Find("quit") != -1 || strInput == "3")
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
 			else
 			{
 				Print("Please type a valid Command.");
@@ -336,12 +336,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1 || strInput == "3")
-			{
-				bIsKeepPlaying = false;
-				break;
-			}
-			else if (strInput == "right" || strInput == "1")
+			if (strInput == "right" || strInput == "1")
 			{
 				Print("You move to the room on the right.");
 				CurrentRoom = AllRooms[1];
@@ -369,6 +364,11 @@ void GameManager::Update()
 					}
 				}
 			}
+			else if (strInput.Find("quit") != -1 || strInput == "3")
+			{
+				bIsKeepPlaying = false;
+				break;
+			}
 			else
 			{
 				Print("Please type a valid Command.");
@@ -390,12 +390,7 @@ void GameManager::Update()
 			strInput = input;
 			strInput.ToLower();
 
-			if (strInput.Find("quit") != -1 || strInput == "6")
-			{
-				bIsKeepPlaying = false;
-				break;
-			}
-			else if (strInput == "left" || strInput == "4")
+			if (strInput == "left" || strInput == "4")
 			{
 				Print("You move to the room on the left.");
 				CurrentRoom = AllRooms[1];
@@ -431,6 +426,11 @@ void GameManager::Update()
 						Print(" \n ");
 					}
 				}
+			}
+			else if (strInput.Find("quit") != -1 || strInput == "6")
+			{
+				bIsKeepPlaying = false;
+				break;
 			}
 			else
 			{
