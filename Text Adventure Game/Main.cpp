@@ -24,7 +24,7 @@ int main()
 
 		char input[256];
 		Driscoll_String strInput;
-		std::cout << "Do you want to restart? \n If so then type: Yes." << std::endl;
+		std::cout << "\033[1;31mDo you want to restart? \n If so then type: Yes. \033[0m" << std::endl;
 		std::cin >> input;
 		strInput = input;
 		strInput.ToLower();
