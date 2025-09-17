@@ -1,6 +1,5 @@
 #include "Driscoll_String.h"
-#include "Driscoll_String.h"
-#include "Driscoll_String.h"
+#include <iostream>
 
 /* CONSTRUCTORS */
 
@@ -134,8 +133,7 @@ Driscoll_String::~Driscoll_String()
 
 /* Driscoll_String FUNCTIONS */
 
-size_t Driscoll_String::GetLength() const
-{
+size_t Driscoll_String::GetLength() const{
 	//Return the Length, and exclude the Null Terminating Operator.
 	return CONTENTS_LENGTH;
 }
@@ -167,10 +165,6 @@ char& Driscoll_String::CharacterAt(size_t _index) const
 bool Driscoll_String::Equals(const Driscoll_String& _otherString) const
 {
 	//Early Exit Check. If the Legnths are not the same, then the String Can Not Be Equal to Each Other.
-	if (GetLength() != _otherString.GetLength())
-	{
-		return false;
-	}
 	
 	for (int i = 0; i < GetLength(); ++i)
 	{
@@ -355,7 +349,7 @@ int Driscoll_String::Find(size_t _startIndex, const Driscoll_String& _subString)
 			++x;
 			if (x == _subString.GetLength())
 			{
-				return i;
+				return (i - _subString.GetLength() + 1);
 			}
 		}
 		else
@@ -374,7 +368,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 	
 	for (int i = Find(_findString); Find(i, _findString) != -1; ++occurences)
 	{
-		i = Find(i, _findString) + 1;
+		i = Find(i, _findString) + _findString.GetLength();
 	}
 	
 	int difference = _replaceString.GetLength() - _findString.GetLength();
@@ -410,7 +404,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 
 	else
 	{
-		CONTENTS_LENGTH += difference;
+		TOTAL_LENGTH += difference;
 	}
 
 	//If find string is greater than replace string, everything MUST shift left.
@@ -419,16 +413,16 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		int index = Find(_findString);
 		while (Find(_findString) != -1)
 		{
-			for (int i = index; i < _findString.GetLength() + index; ++i)
+			for (int i = index; i < CONTENTS_LENGTH + index; ++i)
 			{
 				if ((i - index) < _replaceString.GetLength())
 				{
-					Contents[i] = _replaceString[i - index];
+					Contents[i] = _replaceString[i + index];
 				}
 
 				else
 				{
-					Contents[i] = Contents[i + 1];
+					Contents[i] = Contents[i + index + _findString.GetLength() - 2];
 				}
 			}
 

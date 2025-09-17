@@ -19,6 +19,20 @@ int main()
 {
 	Driscoll_String Str = "Hello World!";
 
+	// Replace
+	Driscoll_String FullName = "Terr John Madden";
+
+	FullName.Replace("Terr", "Bohn");
+	std::cout << (FullName == "Bohn John Madden");
+
+	// GROW from Middle
+	FullName.Replace("John", "Sharpshooter");
+	std::cout << (FullName == "Bohn Sharpshooter Madden");
+
+	// SHRINK from START
+	FullName.Replace("Bohn", "B.");
+	std::cout << (FullName == "B. Sharpshooter Madden");
+
 	std::fstream StringTestFile;
 	StringTestFile.open("StringTestFile.txt", std::ios::out);
 	if (StringTestFile.is_open())
