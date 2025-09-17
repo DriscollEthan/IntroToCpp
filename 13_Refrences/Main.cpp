@@ -18,5 +18,5 @@ float GetLength(Vector3 Vec)
 
 int main()
 {
-	
+
 }
