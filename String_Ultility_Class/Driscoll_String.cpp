@@ -97,7 +97,8 @@ bool Driscoll_String::operator==(const Driscoll_String& _other) const
 	return this->Equals(_other);
 }
 
-bool Driscoll_String::operator!=(const Driscoll_String& _other) const
+//Checks if this String is NOT EQUAL to another String
+inline bool Driscoll_String::operator!=(const Driscoll_String& _other) const
 {
 	return !(this->Equals(_other));
 }
@@ -165,6 +166,7 @@ char& Driscoll_String::CharacterAt(size_t _index) const
 bool Driscoll_String::Equals(const Driscoll_String& _otherString) const
 {
 	//Early Exit Check. If the Legnths are not the same, then the String Can Not Be Equal to Each Other.
+	if (GetLength() != _otherString.GetLength()) return false;
 	
 	for (int i = 0; i < GetLength(); ++i)
 	{
@@ -375,7 +377,7 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 	
 	for (int i = 1; i < occurences; ++i)
 	{
-		difference += (difference < 0) ? (difference * -1) : difference;
+		difference = difference + ((difference < 0) ? (difference * -1) : difference);
 	}
 
 	if (difference > 0)
@@ -400,11 +402,6 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 		CONTENTS_LENGTH = TOTAL_LENGTH - 1;
 		Contents = tempPointerToNewMemory;
 
-	}
-
-	else
-	{
-		TOTAL_LENGTH += difference;
 	}
 
 	//If find string is greater than replace string, everything MUST shift left.
@@ -447,6 +444,22 @@ Driscoll_String& Driscoll_String::Replace(const Driscoll_String& _findString, co
 			}
 		  index = Find(_findString);
 		}
+	}
+
+	if (difference < 0)
+	{
+		TOTAL_LENGTH += difference;
+
+		char* tempPointerToNewMemory = new char[TOTAL_LENGTH];
+
+		for (int i = 0; i < TOTAL_LENGTH; ++i)
+		{
+			tempPointerToNewMemory[i] = Contents[i];
+		}
+
+		delete Contents;
+		CONTENTS_LENGTH = TOTAL_LENGTH - 1;
+		Contents = tempPointerToNewMemory;
 	}
 	//ENSURE THE LAST CHARACTER IS A NULL TERMINATING OPERATOR FOR SAFETY
 	Contents[TOTAL_LENGTH - 1] = '\0';

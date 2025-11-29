@@ -140,6 +140,7 @@ void QuizGame()
 }
 
 
+
 //Main Function
 int main()
 {
@@ -155,7 +156,7 @@ int main()
 	std::cout << " " << std::endl;
 	*/
 
-	QuizGame();
+	//QuizGame();
 
 	/*
 	int Cash = 20;
